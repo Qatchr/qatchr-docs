@@ -1,0 +1,26 @@
+---
+title: "OAuth-integraties"
+description: "Verbind e-mail en agenda via de providerflow."
+---
+
+Qatchr ondersteunt Google Calendar, Gmail, Outlook Calendar en Outlook Mail. Een integratie beschrijft de provider; een integratiekoppeling (`IntegrationLink`) bewaart de verbinding voor de organisatie en gebruiker.
+
+## Verbinden
+
+1. Haal `/api/v1/integrations/` op en kies een integratie.
+2. Open `/api/v1/integrations/{integration_id}/oauth/start?organization_id=<uuid>&user_id=<uuid>` in de browser.
+3. De provider vraagt toestemming en redirect naar de callback.
+4. De callback valideert de gesigneerde state, slaat de koppeling op en redirect naar de frontend.
+5. Haal `/api/v1/integrations/links/` op om de opgeslagen koppeling te lezen.
+
+De generieke link-POST vervangt de OAuth-flow niet. Callbackqueryvelden zoals `state` en `code` worden door de provider aangeleverd; Swagger toont die niet als expliciete parameters. De handlers retourneren standaard `307`-redirects, hoewel Swagger bij deze routes een generieke succesvolle `200` vermeldt.
+
+## Een agenda kiezen
+
+Vraag `/api/v1/integrations/links/{link_id}/get-options/calendar_id` op en sla de keuze op via de link-PATCH. De provider retourneert beschikbare bewerkbare agenda’s. Het actuele linkupdateschema bepaalt hoe de configuratie wordt aangeleverd.
+
+## Deploymentconfiguratie
+
+De runtime gebruikt `API_PUBLIC_URL`, `FRONTEND_URL` en `OAUTH_STATE_SECRET`. Google gebruikt `GOOGLE_OAUTH_CLIENT_ID` en `GOOGLE_OAUTH_CLIENT_SECRET`; Microsoft gebruikt de overeenkomstige `MICROSOFT_OAUTH_*`-velden en optioneel `MICROSOFT_OAUTH_TENANT`.
+
+Providerredirects gebruiken `{API_PUBLIC_URL}/integrations/{integration_id}/oauth/callback`. Waarden en credentials horen bij de deploymentconfiguratie en staan niet in deze documentatie. Een onjuist ingestelde provider kan `OAUTH_CONFIGURATION_ERROR` opleveren.

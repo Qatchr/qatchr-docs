@@ -1,0 +1,19 @@
+---
+title: "Status aanmaken"
+description: "Status aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json POST /api/v1/statuses/"
+---
+
+Status aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-pipelines` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Bron
+
+Swagger-operation: `create_status_api_v1_statuses__post`. Route: `app/api/v1/statuses.py` (`create_status`).

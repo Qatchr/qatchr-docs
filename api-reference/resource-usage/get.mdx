@@ -1,0 +1,15 @@
+---
+title: "Organisatieverbruik ophalen"
+description: "Haal de resourceaantallen van de organisatie op."
+openapi: "/openapi/qatchr.json GET /api/v1/resource-usage"
+---
+
+Gebruik `X-Organization-Id`. Dit endpoint rapporteert resourceverbruik; het is een andere response dan de AI-creditbalans.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Bron
+
+Swagger-operation: `get_resource_usage_api_v1_resource_usage_get`. Route: `app/api/v1/resource_usage.py` (`get_resource_usage`).

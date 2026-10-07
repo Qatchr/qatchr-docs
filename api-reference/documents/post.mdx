@@ -1,0 +1,23 @@
+---
+title: "Document aanmaken"
+description: "Upload een cv of motivatiebrief met JSON en base64-bestandsdata."
+openapi: "/openapi/qatchr.json POST /api/v1/documents/"
+---
+
+Gebruik `type: "CV"` of `"MOTIVATION_LETTER"` en `file_data: {file_name, data, content_type}`. Koppel het document met `candidate_id` en/of `application_id` volgens de documentcontext.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Documenten](/guides/documents) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_document_api_v1_documents__post`. Route: `app/api/v1/documents.py` (`create_document`).

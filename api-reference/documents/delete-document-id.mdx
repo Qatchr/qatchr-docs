@@ -1,0 +1,21 @@
+---
+title: "Document verwijderen"
+description: "Verwijder een document."
+openapi: "/openapi/qatchr.json DELETE /api/v1/documents/{document_id}/"
+---
+
+Deze route heeft in Swagger `200` als succesvolle response en geen concreet payloadmodel. Verwacht hier niet dezelfde `204`-response als bij de meeste andere delete-calls.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Documenten](/guides/documents) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `delete_document_api_v1_documents__document_id___delete`. Route: `app/api/v1/documents.py` (`delete_document`).

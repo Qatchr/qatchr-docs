@@ -1,0 +1,21 @@
+---
+title: "Laatste import ophalen"
+description: "Haal de laatst beschikbare importjob van deze organisatie op."
+openapi: "/openapi/qatchr.json GET /api/v1/relations/imports/latest"
+---
+
+Haal de laatst beschikbare importjob van deze organisatie op.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [CSV importeren](/guides/imports) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `latest_import_api_v1_relations_imports_latest_get`. Route: `app/api/v1/relation_imports.py` (`latest_import`).

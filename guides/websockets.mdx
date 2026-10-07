@@ -1,0 +1,22 @@
+---
+title: "Live events"
+description: "Ontvang organisatie-events naast de HTTP API."
+---
+
+De WebSocket-route is `/ws/{organization_id}` op de API-origin. WebSockets staan niet in de HTTP Swagger-specificatie en tellen niet mee in de 104 API-calls.
+
+De huidige manager verstuurt een envelope met drie velden:
+
+```json
+{
+  "event_type": "<eventnaam>",
+  "organization_id": "<organization-uuid>",
+  "payload": {}
+}
+```
+
+De payload hangt af van het event. De manager definieert geen algemene replay, sequence-ID of resume-token. Haal de relevante HTTP-resource opnieuw op wanneer je een actuele toestand nodig hebt na reconnect.
+
+De handler accepteert de verbinding voor het organisatie-ID in het pad en ontvangt JSON-berichten zolang de verbinding open is. De route declareert zelf geen token- of membershipcheck. Welke beveiliging voor WebSocket-toegang bestaat, hangt daarom af van de gateway/deployment; neem het HTTP-authenticatiecontract niet automatisch over.
+
+Dit document definieert geen afzonderlijk webhook-abonnement: de backendroute is een WebSocket, geen HTTP-webhook API.

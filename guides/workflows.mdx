@@ -1,0 +1,31 @@
+---
+title: "Processen en statussen"
+description: "Begrijp knooppunten, acties, overgangen en eindstatussen."
+---
+
+Een proces (`Workflow`) bestaat uit `nodes` en `transitions`. Een vacature kan een proces gebruiken; een sollicitatie heeft een workflowinstance die naar dat proces verwijst.
+
+| Begrip | Betekenis |
+| --- | --- |
+| Node `START` | Het startknooppunt; een proces heeft precies één start. |
+| Node `STEP` | Een stap met acties en uitkomsten. |
+| Node `END` | Een eindknooppunt in de processtructuur. |
+| Action | Een actie van type `TASK`, `REPORT`, `SCHEDULE` of `FORM`. |
+| Transition | Overgang van een node naar een andere node, eventueel gekoppeld aan een uitkomst. |
+| Status | Een apart statusrecord met categorie, kleur en `is_terminal`. |
+
+## Knooppunt en status zijn verschillende gegevens
+
+De naam van een processtap hoeft niet gelijk te zijn aan de sollicitatiestatus. Een node kan via `change_status` en `status_id` een status veranderen. Statuscategorieën zijn `NEW`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED` en `REJECTED`; `is_terminal` bepaalt of een status een eindstatus is.
+
+Een node van type `END` en een node met een terminale status zijn verschillende kenmerken. Als je een compact procesoverzicht maakt, kun je beide verbergen, behalve wanneer de huidige node daarin zit.
+
+## Processtructuur schrijven
+
+Create-inputs gebruiken `key` om nieuwe nodes, acties en uitkomsten te identificeren. Transitions gebruiken onder andere `from_node_key` en `to_node_key`; responsemodellen geven de opgeslagen UUID-verwijzingen terug. Neem de input- en responsevelden niet rechtstreeks van elkaar over.
+
+Bij een structuurwijziging via PATCH moeten `nodes` en `transitions` samen worden aangeleverd. Nodekeys en transitions moeten uniek zijn. Iedere overgang moet naar bekende nodes en, waar gebruikt, bekende acties of uitkomsten verwijzen. Raadpleeg de create- en update-schema’s voor de volledige structuur.
+
+## Huidige stap bepalen
+
+Lees `application.workflow_instance.current_node_id`. De complete structuur haal je op via `GET /api/v1/workflows/{workflow_id}`. Een visuele sortering op coördinaten is geen uitvoeringshistorie. De workflow gebruikt acties, uitkomsten en transitions om verder te gaan.

@@ -1,0 +1,17 @@
+---
+title: "Vacature aanmaken"
+description: "Vacature aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json POST /api/v1/vacancies/"
+---
+
+Vacature aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-vacancies` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `create_vacancy_api_v1_vacancies__post`. Route: `app/api/v1/vacancies.py` (`create_vacancy`).

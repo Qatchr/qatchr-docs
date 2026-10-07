@@ -1,0 +1,115 @@
+---
+title: "Alle API-calls"
+description: "Vind iedere HTTP-call uit de Qatchr Swagger-specificatie."
+---
+
+Deze referentie bevat **104 API-calls** en **125 schema’s** uit de lokale Qatchr API. De paden behouden hun exacte trailing slash.
+
+De API-prefix is `/api/v1`; `/health-check` staat op de root. Swagger UI staat standaard op `/docs`, de OpenAPI-specificatie op `/openapi.json`. WebSockets staan niet in de HTTP-specificatie.
+
+| Methode | Pad | Onderdeel |
+| --- | --- | --- |
+| `GET` | [`/health-check`](/api-reference/health-check/get) | Health |
+| `GET` | [`/api/v1/ai-credits`](/api-reference/ai-credits/get) | AI-credits |
+| `GET` | [`/api/v1/tasks/`](/api-reference/tasks/get) | Taken |
+| `GET` | [`/api/v1/tasks/{task_id}`](/api-reference/tasks/get-task-id) | Taken |
+| `POST` | [`/api/v1/tasks/{task_id}/handle/`](/api-reference/tasks/post-task-id-handle) | Taken |
+| `PATCH` | [`/api/v1/tasks/{task_id}/attention/`](/api-reference/tasks/patch-task-id-attention) | Taken |
+| `PATCH` | [`/api/v1/tasks/{task_id}/deadline/`](/api-reference/tasks/patch-task-id-deadline) | Taken |
+| `GET` | [`/api/v1/applications/`](/api-reference/applications/get) | Sollicitaties |
+| `POST` | [`/api/v1/applications/`](/api-reference/applications/post) | Sollicitaties |
+| `GET` | [`/api/v1/applications/{application_id}`](/api-reference/applications/get-application-id) | Sollicitaties |
+| `POST` | [`/api/v1/applications/existing-application/`](/api-reference/applications/post-existing-application) | Sollicitaties |
+| `POST` | [`/api/v1/applications/candidate-application/`](/api-reference/applications/post-candidate-application) | Sollicitaties |
+| `PATCH` | [`/api/v1/applications/{application_id}/`](/api-reference/applications/patch-application-id) | Sollicitaties |
+| `DELETE` | [`/api/v1/applications/{application_id}/`](/api-reference/applications/delete-application-id) | Sollicitaties |
+| `POST` | [`/api/v1/candidates/imports/preview`](/api-reference/candidates/post-imports-preview) | Kandidaten |
+| `POST` | [`/api/v1/candidates/imports`](/api-reference/candidates/post-imports) | Kandidaten |
+| `GET` | [`/api/v1/candidates/imports/latest`](/api-reference/candidates/get-imports-latest) | Kandidaten |
+| `GET` | [`/api/v1/candidates/imports/{job_id}`](/api-reference/candidates/get-imports-job-id) | Kandidaten |
+| `GET` | [`/api/v1/candidates/`](/api-reference/candidates/get) | Kandidaten |
+| `POST` | [`/api/v1/candidates/`](/api-reference/candidates/post) | Kandidaten |
+| `GET` | [`/api/v1/candidates/tags/options`](/api-reference/candidates/get-tags-options) | Kandidaten |
+| `PUT` | [`/api/v1/candidates/{candidate_id}/tags/`](/api-reference/candidates/put-candidate-id-tags) | Kandidaten |
+| `GET` | [`/api/v1/candidates/{candidate_id}`](/api-reference/candidates/get-candidate-id) | Kandidaten |
+| `POST` | [`/api/v1/candidates/from-cv/`](/api-reference/candidates/post-from-cv) | Kandidaten |
+| `POST` | [`/api/v1/candidates/from-linkedin-url/`](/api-reference/candidates/post-from-linkedin-url) | Kandidaten |
+| `PATCH` | [`/api/v1/candidates/{candidate_id}/`](/api-reference/candidates/patch-candidate-id) | Kandidaten |
+| `DELETE` | [`/api/v1/candidates/{candidate_id}/`](/api-reference/candidates/delete-candidate-id) | Kandidaten |
+| `POST` | [`/api/v1/documents/`](/api-reference/documents/post) | Documenten |
+| `GET` | [`/api/v1/documents/`](/api-reference/documents/get) | Documenten |
+| `GET` | [`/api/v1/documents/{document_id}`](/api-reference/documents/get-document-id) | Documenten |
+| `GET` | [`/api/v1/documents/{document_id}/url`](/api-reference/documents/get-document-id-url) | Documenten |
+| `DELETE` | [`/api/v1/documents/{document_id}/`](/api-reference/documents/delete-document-id) | Documenten |
+| `GET` | [`/api/v1/workflows/`](/api-reference/workflows/get) | Processen |
+| `POST` | [`/api/v1/workflows/`](/api-reference/workflows/post) | Processen |
+| `GET` | [`/api/v1/workflows/{workflow_id}`](/api-reference/workflows/get-workflow-id) | Processen |
+| `PATCH` | [`/api/v1/workflows/{workflow_id}/`](/api-reference/workflows/patch-workflow-id) | Processen |
+| `DELETE` | [`/api/v1/workflows/{workflow_id}/`](/api-reference/workflows/delete-workflow-id) | Processen |
+| `GET` | [`/api/v1/statuses/`](/api-reference/statuses/get) | Statussen |
+| `POST` | [`/api/v1/statuses/`](/api-reference/statuses/post) | Statussen |
+| `GET` | [`/api/v1/statuses/{status_id}`](/api-reference/statuses/get-status-id) | Statussen |
+| `PATCH` | [`/api/v1/statuses/{status_id}/`](/api-reference/statuses/patch-status-id) | Statussen |
+| `DELETE` | [`/api/v1/statuses/{status_id}/`](/api-reference/statuses/delete-status-id) | Statussen |
+| `GET` | [`/api/v1/vacancies/`](/api-reference/vacancies/get) | Vacatures |
+| `POST` | [`/api/v1/vacancies/`](/api-reference/vacancies/post) | Vacatures |
+| `GET` | [`/api/v1/vacancies/tags/options`](/api-reference/vacancies/get-tags-options) | Vacatures |
+| `PUT` | [`/api/v1/vacancies/{vacancy_id}/tags/`](/api-reference/vacancies/put-vacancy-id-tags) | Vacatures |
+| `GET` | [`/api/v1/vacancies/{vacancy_id}`](/api-reference/vacancies/get-vacancy-id) | Vacatures |
+| `POST` | [`/api/v1/vacancies/from-prompt/`](/api-reference/vacancies/post-from-prompt) | Vacatures |
+| `POST` | [`/api/v1/vacancies/from-url/`](/api-reference/vacancies/post-from-url) | Vacatures |
+| `PATCH` | [`/api/v1/vacancies/{vacancy_id}/`](/api-reference/vacancies/patch-vacancy-id) | Vacatures |
+| `DELETE` | [`/api/v1/vacancies/{vacancy_id}/`](/api-reference/vacancies/delete-vacancy-id) | Vacatures |
+| `GET` | [`/api/v1/locations/`](/api-reference/locations/get) | Locaties |
+| `POST` | [`/api/v1/locations/`](/api-reference/locations/post) | Locaties |
+| `GET` | [`/api/v1/locations/{location_id}`](/api-reference/locations/get-location-id) | Locaties |
+| `PATCH` | [`/api/v1/locations/{location_id}/`](/api-reference/locations/patch-location-id) | Locaties |
+| `DELETE` | [`/api/v1/locations/{location_id}/`](/api-reference/locations/delete-location-id) | Locaties |
+| `POST` | [`/api/v1/relations/imports/preview`](/api-reference/relations/post-imports-preview) | Relaties |
+| `POST` | [`/api/v1/relations/imports`](/api-reference/relations/post-imports) | Relaties |
+| `GET` | [`/api/v1/relations/imports/latest`](/api-reference/relations/get-imports-latest) | Relaties |
+| `GET` | [`/api/v1/relations/imports/{job_id}`](/api-reference/relations/get-imports-job-id) | Relaties |
+| `GET` | [`/api/v1/relations/`](/api-reference/relations/get) | Relaties |
+| `POST` | [`/api/v1/relations/`](/api-reference/relations/post) | Relaties |
+| `GET` | [`/api/v1/relations/organization`](/api-reference/relations/get-organization) | Relaties |
+| `GET` | [`/api/v1/relations/tags/options`](/api-reference/relations/get-tags-options) | Relaties |
+| `PUT` | [`/api/v1/relations/{relation_id}/tags/`](/api-reference/relations/put-relation-id-tags) | Relaties |
+| `GET` | [`/api/v1/relations/{relation_id}`](/api-reference/relations/get-relation-id) | Relaties |
+| `PATCH` | [`/api/v1/relations/{relation_id}/`](/api-reference/relations/patch-relation-id) | Relaties |
+| `DELETE` | [`/api/v1/relations/{relation_id}/`](/api-reference/relations/delete-relation-id) | Relaties |
+| `GET` | [`/api/v1/contact-persons/`](/api-reference/contact-persons/get) | Contactpersonen |
+| `POST` | [`/api/v1/contact-persons/`](/api-reference/contact-persons/post) | Contactpersonen |
+| `GET` | [`/api/v1/contact-persons/{contact_person_id}`](/api-reference/contact-persons/get-contact-person-id) | Contactpersonen |
+| `PATCH` | [`/api/v1/contact-persons/{contact_person_id}/`](/api-reference/contact-persons/patch-contact-person-id) | Contactpersonen |
+| `DELETE` | [`/api/v1/contact-persons/{contact_person_id}/`](/api-reference/contact-persons/delete-contact-person-id) | Contactpersonen |
+| `GET` | [`/api/v1/contracts/`](/api-reference/contracts/get) | Contracten |
+| `POST` | [`/api/v1/contracts/`](/api-reference/contracts/post) | Contracten |
+| `GET` | [`/api/v1/contracts/{contract_id}`](/api-reference/contracts/get-contract-id) | Contracten |
+| `GET` | [`/api/v1/contracts/{contract_id}/url`](/api-reference/contracts/get-contract-id-url) | Contracten |
+| `PATCH` | [`/api/v1/contracts/{contract_id}/`](/api-reference/contracts/patch-contract-id) | Contracten |
+| `DELETE` | [`/api/v1/contracts/{contract_id}/`](/api-reference/contracts/delete-contract-id) | Contracten |
+| `GET` | [`/api/v1/talent-pools/`](/api-reference/talent-pools/get) | Talentpools |
+| `POST` | [`/api/v1/talent-pools/`](/api-reference/talent-pools/post) | Talentpools |
+| `GET` | [`/api/v1/talent-pools/{talent_pool_id}`](/api-reference/talent-pools/get-talent-pool-id) | Talentpools |
+| `PATCH` | [`/api/v1/talent-pools/{talent_pool_id}/`](/api-reference/talent-pools/patch-talent-pool-id) | Talentpools |
+| `DELETE` | [`/api/v1/talent-pools/{talent_pool_id}/`](/api-reference/talent-pools/delete-talent-pool-id) | Talentpools |
+| `GET` | [`/api/v1/call-lists/`](/api-reference/call-lists/get) | Bellijsten |
+| `POST` | [`/api/v1/call-lists/`](/api-reference/call-lists/post) | Bellijsten |
+| `GET` | [`/api/v1/call-lists/{call_list_id}`](/api-reference/call-lists/get-call-list-id) | Bellijsten |
+| `PATCH` | [`/api/v1/call-lists/{call_list_id}/`](/api-reference/call-lists/patch-call-list-id) | Bellijsten |
+| `DELETE` | [`/api/v1/call-lists/{call_list_id}/`](/api-reference/call-lists/delete-call-list-id) | Bellijsten |
+| `GET` | [`/api/v1/integrations/`](/api-reference/integrations/get) | Integraties |
+| `GET` | [`/api/v1/integrations/links/`](/api-reference/integrations/get-links) | Integraties |
+| `POST` | [`/api/v1/integrations/links/`](/api-reference/integrations/post-links) | Integraties |
+| `PATCH` | [`/api/v1/integrations/links/{link_id}`](/api-reference/integrations/patch-links-link-id) | Integraties |
+| `DELETE` | [`/api/v1/integrations/links/{link_id}`](/api-reference/integrations/delete-links-link-id) | Integraties |
+| `GET` | [`/api/v1/integrations/links/{link_id}/get-options/{key}`](/api-reference/integrations/get-links-link-id-get-options-key) | Integraties |
+| `GET` | [`/api/v1/integrations/{integration_id}/oauth/start`](/api-reference/integrations/get-integration-id-oauth-start) | Integraties |
+| `GET` | [`/api/v1/integrations/{integration_id}/oauth/callback`](/api-reference/integrations/get-integration-id-oauth-callback) | Integraties |
+| `GET` | [`/api/v1/resource-usage`](/api-reference/resource-usage/get) | Verbruik |
+| `GET` | [`/api/v1/recruitment-news/`](/api-reference/recruitment-news/get) | Recruitmentnieuws |
+| `POST` | [`/api/v1/organization-profile/`](/api-reference/organization-profile/post) | Organisatieprofiel |
+| `DELETE` | [`/api/v1/organization-profile/`](/api-reference/organization-profile/delete) | Organisatieprofiel |
+| `GET` | [`/api/v1/organization-lifecycle/ready`](/api-reference/organization-lifecycle/get-ready) | Organisatielevenscyclus (intern) |
+| `GET` | [`/api/v1/organization-lifecycle/ready/{organization_id}`](/api-reference/organization-lifecycle/get-ready-organization-id) | Organisatielevenscyclus (intern) |
+| `POST` | [`/api/v1/organization-lifecycle/{organization_id}/{action}`](/api-reference/organization-lifecycle/post-organization-id-action) | Organisatielevenscyclus (intern) |

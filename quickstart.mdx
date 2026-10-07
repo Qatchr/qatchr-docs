@@ -1,47 +1,52 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Je eerste API-call"
+description: "Haal vacatures op met de juiste organisatiecontext."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+Je hebt een bereikbare Qatchr API, een access token uit de identiteitsomgeving en het ID van je organisatie nodig. Gebruik een account met `view-vacancies` binnen scope `qatchr`.
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Stel de API-origin in">
+    Gebruik het domein van jouw deployment. De voorbeeldorigin is een placeholder; de prefix wordt in de calls toegevoegd.
 
     ```bash
-    npm install your-package
+    export QATCHR_ORIGIN="https://api.example.com"
+    export QATCHR_TOKEN="<access-token>"
+    export QATCHR_ORGANIZATION_ID="<organization-uuid>"
+    export QATCHR_USER_ID="<user-uuid>"
     ```
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
-
+  <Step title="Haal de eerste pagina op">
     ```bash
-    your-cli init
+    curl --request GET       "$QATCHR_ORIGIN/api/v1/vacancies/?offset=0&limit=10"       --header "Authorization: Bearer $QATCHR_TOKEN"       --header "X-Organization-Id: $QATCHR_ORGANIZATION_ID"       --header "X-User-Id: $QATCHR_USER_ID"
+    ```
+
+    De JSON-response bevat `results` en `total_count`. Een lege lijst ziet er zo uit:
+
+    ```json
+    { "results": [], "total_count": 0 }
     ```
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
-
-    ```bash
-    your-cli start
-    ```
+  <Step title="Gebruik de response">
+    Bewaar de UUID van de vacature die je nodig hebt. Gebruik de detailcall om die vacature op te halen, of start een sollicitatie met de kandidaat- en vacature-ID.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## JavaScript-voorbeeld
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+```javascript
+const origin = "https://api.example.com";
+const response = await fetch(`${origin}/api/v1/vacancies/?offset=0&limit=10`, {
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+    "X-Organization-Id": organizationId,
+    "X-User-Id": userId,
+  },
+});
+if (!response.ok) {
+  throw new Error(`Qatchr returned HTTP ${response.status}`);
+}
+const { results, total_count } = await response.json();
+```
+
+Bekijk [authenticatie](/guides/authentication), [foutresponses](/guides/errors) en [alle API-calls](/api-reference/overview) voor de volgende stap.

@@ -1,0 +1,17 @@
+---
+title: "Relatie ophalen"
+description: "Relatie ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/relations/{relation_id}"
+---
+
+Relatie ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_relation_api_v1_relations__relation_id__get`. Route: `app/api/v1/relations.py` (`get_relation`).

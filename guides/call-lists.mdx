@@ -1,0 +1,23 @@
+---
+title: "Bellijsten"
+description: "Groepeer kandidaten en relaties voor recruitment voor anderen."
+---
+
+Een bellijst bevat een naam, beschrijving, kandidaten en relaties. Deze functie vereist recruitmenttype `others` of `selfAndOthers`; de API controleert dit bij elke call tegen IAM.
+
+Alle leesacties vereisen `view-relations` en `view-candidates`. Schrijven vereist ook `manage-relations` en subscriptiontoegang. Een onjuist recruitmenttype geeft `403 CALL_LISTS_NOT_ALLOWED`; een mislukte verificatie geeft `502 RECRUITMENT_TYPE_CHECK_FAILED`.
+
+Create-input gebruikt `candidate_ids` en `relation_ids`:
+
+```json
+{
+  "name": "Frontendselectie",
+  "description": "Kandidaten voor klantgesprekken",
+  "candidate_ids": ["22222222-2222-4222-8222-222222222222"],
+  "relation_ids": ["33333333-3333-4333-8333-333333333333"]
+}
+```
+
+Bij PATCH is `name` in het huidige schema verplicht. Laat een ID-lijst weg om de koppelingen te behouden, of stuur de complete vervangende lijst. Een lege lijst wist de betreffende koppelingen. Verwijderde en geanonimiseerde kandidaten worden niet in de response getoond.
+
+Talentpools hebben een apart model en aparte calls; ze zijn niet hetzelfde als bellijsten.

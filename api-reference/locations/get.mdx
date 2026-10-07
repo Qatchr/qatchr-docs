@@ -1,0 +1,21 @@
+---
+title: "Locaties ophalen"
+description: "Locaties ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/locations/"
+---
+
+Locaties ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Bron
+
+Swagger-operation: `list_locations_api_v1_locations__get`. Route: `app/api/v1/locations.py` (`list_locations`).

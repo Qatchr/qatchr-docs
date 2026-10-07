@@ -1,0 +1,21 @@
+---
+title: "Persoonlijke taakzichtbaarheid wijzigen"
+description: "Snooze, verberg of herstel een taak voor de huidige gebruiker."
+openapi: "/openapi/qatchr.json PATCH /api/v1/tasks/{task_id}/attention/"
+---
+
+Gebruik `action: "snooze"`, `"dismiss"` of `"restore"`. Alleen snooze accepteert `snoozed_until`, met een toekomstige tijd en expliciete UTC-offset. De voorkeur hoort bij `X-User-Id` binnen de organisatie. De deadline, toewijzing en workflow blijven gelijk.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [Taken afhandelen](/guides/tasks) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `update_task_attention_api_v1_tasks__task_id__attention__patch`. Route: `app/api/v1/tasks.py` (`update_task_attention`).

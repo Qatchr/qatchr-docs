@@ -1,0 +1,25 @@
+---
+title: "Bellijst verwijderen"
+description: "Bellijst verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json DELETE /api/v1/call-lists/{call_list_id}/"
+---
+
+Bellijst verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-candidates` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+Alle bellijstcalls vereisen daarnaast recruitmenttype `others` of `selfAndOthers`. Zie [bellijsten](/guides/call-lists).
+
+## Bron
+
+Swagger-operation: `delete_call_list_api_v1_call_lists__call_list_id___delete`. Route: `app/api/v1/call_lists.py` (`delete_call_list`).

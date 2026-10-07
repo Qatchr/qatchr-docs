@@ -1,0 +1,21 @@
+---
+title: "Kandidaat uit LinkedIn aanmaken"
+description: "Verrijk kandidaatdata via een LinkedIn-URL."
+openapi: "/openapi/qatchr.json POST /api/v1/candidates/from-linkedin-url/"
+---
+
+Stuur `linkedin_url`. Dit gebruikt een externe AI-aanvraag en kost een AI-credit; gebruik de daadwerkelijk beschikbare responsevelden uit `CandidateSchema`.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [AI-credits](/guides/ai-credits) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_candidate_by_linkedin_url_api_v1_candidates_from_linkedin_url__post`. Route: `app/api/v1/candidates.py` (`create_candidate_by_linkedin_url`).

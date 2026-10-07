@@ -1,0 +1,23 @@
+---
+title: "Taakdeadline wijzigen"
+description: "Wijzig of verwijder de gedeelde deadline van een actieve taak."
+openapi: "/openapi/qatchr.json PATCH /api/v1/tasks/{task_id}/deadline/"
+---
+
+Stuur `due_at` met een expliciete UTC-offset, of `null` om de deadline te verwijderen. Dit wijzigt de gedeelde taak; persoonlijke snoozevoorkeuren veranderen niet.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Taken afhandelen](/guides/tasks) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `update_task_deadline_api_v1_tasks__task_id__deadline__patch`. Route: `app/api/v1/tasks.py` (`update_task_deadline`).

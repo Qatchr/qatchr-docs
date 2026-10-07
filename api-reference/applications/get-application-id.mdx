@@ -1,0 +1,21 @@
+---
+title: "Sollicitatie ophalen"
+description: "Haal een sollicitatie inclusief kandidaat, vacature en huidige workflowstap op."
+openapi: "/openapi/qatchr.json GET /api/v1/applications/{application_id}"
+---
+
+De response bevat `workflow_instance.workflow_id` en `workflow_instance.current_node_id` met `current_node`. De volledige processtructuur is geen top-level `workflow` in deze response. Haal die apart op met `GET /api/v1/workflows/{workflow_id}`. `status` is de sollicitatiestatus; de huidige processtap kan een andere naam hebben.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-applications` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [Sollicitaties](/guides/applications) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_application_api_v1_applications__application_id__get`. Route: `app/api/v1/applications.py` (`get_application`).

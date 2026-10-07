@@ -1,0 +1,23 @@
+---
+title: "Bestaande kandidaat laten solliciteren"
+description: "Koppel een bestaande kandidaat aan een vacature."
+openapi: "/openapi/qatchr.json POST /api/v1/applications/existing-application/"
+---
+
+Stuur `candidate_id` en `vacancy_id`. Met optioneel `workflow_id` kies je expliciet een proces voor deze sollicitatie. Gebruik UUID’s uit dezelfde organisatie.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Sollicitaties](/guides/applications) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_existing_candidate_application_api_v1_applications_existing_application__post`. Route: `app/api/v1/applications.py` (`create_existing_candidate_application`).

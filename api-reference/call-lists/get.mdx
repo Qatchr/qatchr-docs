@@ -1,0 +1,29 @@
+---
+title: "Bellijsten ophalen"
+description: "Beheer bellijsten met kandidaten en relaties."
+openapi: "/openapi/qatchr.json GET /api/v1/call-lists/"
+---
+
+Bellijsten zijn beschikbaar voor recruitmenttype `others` of `selfAndOthers`. Aanmaken gebruikt `candidate_ids` en `relation_ids`. Bij wijzigen vervangt een aangeleverde lijst de gekoppelde IDs; laat een veld weg om die koppelingen te behouden. Verwijderde en geanonimiseerde kandidaten worden niet getoond.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-candidates` binnen scope `qatchr`.
+
+Alle bellijstcalls vereisen daarnaast recruitmenttype `others` of `selfAndOthers`. Zie [bellijsten](/guides/call-lists).
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Meer uitleg
+
+Zie [Bellijsten](/guides/call-lists) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `list_call_lists_api_v1_call_lists__get`. Route: `app/api/v1/call_lists.py` (`list_call_lists`).

@@ -1,0 +1,19 @@
+---
+title: "Locatie verwijderen"
+description: "Locatie verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json DELETE /api/v1/locations/{location_id}/"
+---
+
+Locatie verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Bron
+
+Swagger-operation: `delete_location_api_v1_locations__location_id___delete`. Route: `app/api/v1/locations.py` (`delete_location`).

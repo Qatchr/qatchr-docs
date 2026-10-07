@@ -1,0 +1,21 @@
+---
+title: "Processen ophalen"
+description: "Processen ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/workflows/"
+---
+
+Processen ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-pipelines` binnen scope `qatchr`.
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Bron
+
+Swagger-operation: `list_workflows_api_v1_workflows__get`. Route: `app/api/v1/workflows.py` (`list_workflows`).

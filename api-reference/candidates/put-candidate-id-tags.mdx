@@ -1,0 +1,23 @@
+---
+title: "Tags vervangen"
+description: "Vervang alle tags van dit record."
+openapi: "/openapi/qatchr.json PUT /api/v1/candidates/{candidate_id}/tags/"
+---
+
+Stuur `{"names":["Frontend","Vue.js"]}`. Dit vervangt de volledige set; `{"names":[]}` wist de koppelingen. Namen worden getrimd en hoofdletterongevoelig hergebruikt. Maximaal 50 tags per record en 80 tekens per naam.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Gedeelde tags](/guides/tags) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `replace_tags_api_v1_candidates__candidate_id__tags__put`. Route: `app/api/v1/candidates.py` (`replace_tags`).

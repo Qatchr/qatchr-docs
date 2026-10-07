@@ -1,0 +1,23 @@
+---
+title: "Proces wijzigen"
+description: "Wijzig procesinstellingen en optioneel de volledige structuur."
+openapi: "/openapi/qatchr.json PATCH /api/v1/workflows/{workflow_id}/"
+---
+
+Als je `nodes` of `transitions` wijzigt, moet je beide meesturen. Knooppuntkeys moeten uniek zijn; het proces heeft precies één startknooppunt. Overgangen verwijzen naar keys in de aangeleverde structuur.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-pipelines` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Processen en statussen](/guides/workflows) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `update_workflow_api_v1_workflows__workflow_id___patch`. Route: `app/api/v1/workflows.py` (`update_workflow`).

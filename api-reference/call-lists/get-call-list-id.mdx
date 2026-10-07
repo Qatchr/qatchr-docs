@@ -1,0 +1,21 @@
+---
+title: "Bellijst ophalen"
+description: "Bellijst ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/call-lists/{call_list_id}"
+---
+
+Bellijst ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-candidates` binnen scope `qatchr`.
+
+Alle bellijstcalls vereisen daarnaast recruitmenttype `others` of `selfAndOthers`. Zie [bellijsten](/guides/call-lists).
+
+## Bron
+
+Swagger-operation: `get_call_list_api_v1_call_lists__call_list_id__get`. Route: `app/api/v1/call_lists.py` (`get_call_list`).

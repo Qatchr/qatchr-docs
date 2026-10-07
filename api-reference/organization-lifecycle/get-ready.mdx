@@ -1,0 +1,19 @@
+---
+title: "Lifecyclegereedheid controleren"
+description: "Controleer of het interne lifecycleprotocol beschikbaar is."
+openapi: "/openapi/qatchr.json GET /api/v1/organization-lifecycle/ready"
+---
+
+Deze call vereist `X-Lifecycle-Key`. Lifecycleondersteuning staat standaard uit; de handler retourneert dan `503`. De organisatievariant inventariseert resourceaantallen.
+
+## Toegang
+
+Dit is een interne servicecall. Gebruik `X-Lifecycle-Key`; een normale bearer-token vervangt deze sleutel niet. Zie [organisatielifecycle](/guides/organization-lifecycle).
+
+## Meer uitleg
+
+Zie [Organisatielifecycle](/guides/organization-lifecycle) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `ready_api_v1_organization_lifecycle_ready_get`. Route: `app/services/organization_lifecycle.py` (`ready`).

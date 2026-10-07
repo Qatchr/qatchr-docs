@@ -1,0 +1,30 @@
+---
+title: "Authenticatie en organisatiecontext"
+description: "Gebruik access tokens, organisatieheaders en endpointrechten."
+---
+
+Qatchr API geeft geen access tokens uit. Verkrijg je token via de identiteitsomgeving die bij jouw deployment hoort. Calls met een permission-check sturen de autorisatie en organisatiecontext door naar de IAM-verificatie.
+
+| Header | Gebruik |
+| --- | --- |
+| `Authorization: Bearer <access-token>` | Authenticatie bij routes met `check_permission`, en waar de gateway dit vereist. |
+| `X-Organization-Id` | Organisatiecontext voor tenantgebonden gegevens en permission-checks. |
+| `X-User-Id` | Gebruikerscontext voor onder andere persoonlijke taakvoorkeuren, auditvelden en integraties. |
+| `Content-Type: application/json` | JSON-bodies. Laat je HTTP-client bij multipart de boundary instellen. |
+| `X-Lifecycle-Key` | Uitsluitend het interne organisatielifecycleprotocol. |
+
+## Rechten per endpoint
+
+De API-referentie noemt de gedeclareerde rechten per call. Een leesrecht zoals `view-applications` en een beheerrecht zoals `manage-applications` zijn verschillende rechten. Sommige routes vereisen meerdere rechten; voor bellijsten zijn zowel kandidaat- als relatierechten nodig. Organisatieprofielcalls gebruiken `manage-organization` binnen scope `organization`.
+
+Een `check_permission()` zonder specifiek recht controleert geauthenticeerd lidmaatschap, bijvoorbeeld bij AI-credits. De routes zijn niet allemaal op dezelfde manier beveiligd: enkele routes hebben alleen controllercontroles op organisatie- of gebruikersheaders. De documentatie voegt voor die routes geen verzonnen permission-label toe. Houd ook rekening met toegangscontrole in de gateway van jouw deployment.
+
+## Abonnement en functievoorwaarden
+
+`require_subscription` controleert algemene Qatchr-toegang bij de routes die deze decorator hebben. Aanmaakflows kunnen daarnaast resourcequota controleren. Beschikbare AI-credits worden afzonderlijk gecontroleerd. Bellijsten vereisen recruitmenttype `others` of `selfAndOthers`.
+
+## Fouten bij toegangscontrole
+
+Een ontbrekend token op een permission-route levert `401 NOT_AUTHENTICATED` op. Een ontbrekende organisatieheader op die check levert `400 BAD_REQUEST` op. Controllers kunnen een ontbrekende organisatiecontext als `401 UNAUTHORIZED` behandelen. IAM kan toegang weigeren; een onbereikbare permission-service geeft `502 PERMISSION_CHECK_FAILED` of `504 PERMISSION_CHECK_TIMEOUT`.
+
+De Qatchr API kan niet bepalen welke login-URL en OAuth-client jij moet gebruiken: die configuratie hoort bij de identiteitsomgeving van je deployment.

@@ -1,0 +1,17 @@
+---
+title: "Locatie ophalen"
+description: "Locatie ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/locations/{location_id}"
+---
+
+Locatie ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_location_api_v1_locations__location_id__get`. Route: `app/api/v1/locations.py` (`get_location`).

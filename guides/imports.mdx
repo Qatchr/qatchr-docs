@@ -1,0 +1,41 @@
+---
+title: "CSV importeren"
+description: "Importeer kandidaten en relaties met een duurzame achtergrondjob."
+---
+
+Kandidaten en relaties hebben dezelfde routevorm: `/api/v1/candidates/imports` en `/api/v1/relations/imports`. Preview en statuscalls vereisen het betreffende `manage-*`-recht.
+
+## Bestandsregels
+
+Gebruik UTF-8, eventueel met BOM. Komma, puntkomma en tab worden ondersteund, inclusief quoted values en newlines binnen een cel. Maximaal **5 MB**, **5000 datarijen** en **100 kolommen**. Headers moeten uniek en niet leeg zijn; lege records tellen niet mee.
+
+## Werkwijze
+
+1. POST multipart `file` naar `/imports/preview` voor headers, rijtelling en een voorbeeldrecord.
+2. Maak een mapping van doelveldnamen naar kolomindexen vanaf nul.
+3. POST multipart `file` en `mapping` naar `/imports`. Mapping is een JSON-string. De response is `202` met een opgeslagen jobstatus.
+4. Vraag `/imports/{job_id}` of `/imports/latest` op om voortgang en rijmeldingen te lezen.
+
+```bash
+curl --request POST   "$QATCHR_ORIGIN/api/v1/candidates/imports"   --header "Authorization: Bearer $QATCHR_TOKEN"   --header "X-Organization-Id: $QATCHR_ORGANIZATION_ID"   --form 'file=@candidates.csv'   --form 'mapping={"first_name":0,"last_name":1,"email":2}'
+```
+
+Stel bij `--form` zelf geen JSON-contenttype in: curl maakt de multipartboundary.
+
+## Kandidaten
+
+Koppel minimaal `first_name`, `last_name` en `email`. Optionele velden omvatten telefoon, LinkedIn, locatie, coördinaten, notities, skills, recruiter, hiring manager, ervaring en opleiding. Skills gebruiken bijvoorbeeld `Python|SQL` of een JSON-array. Ervaring en opleiding gebruiken JSON-arrays volgens de create-schema’s.
+
+De volledige file wordt vóór acceptatie tegen het quotum gecontroleerd. Duplicaat-e-mails worden binnen de organisatie hoofdletterongevoelig overgeslagen, ook bij herhaling in de file. Bestaande kandidaten worden niet bijgewerkt. Importeren doet geen AI- of geocodingcalls.
+
+## Relaties
+
+Koppel minimaal `name`. Als je locatiekolommen koppelt, zijn `location_name`, `location_address` en `location_city` nodig. Voor contactkolommen zijn `contact_first_name`, `contact_last_name` en `contact_phone_number` nodig. Een rij mag een complete optionele groep leeg laten.
+
+Herhaal dezelfde relatienaam om meerdere locaties of contactpersonen toe te voegen. Bestaande gegevens worden gematcht binnen de organisatie en niet overschreven. Ambigue matches geven een rijmelding. `imported` telt rijen waarin iets werd toegevoegd; `skipped` telt rijen zonder wijziging.
+
+## Voortgang en fouten
+
+Per importsoort is één actieve job per organisatie toegestaan. De achtergrondwerker verwerkt maximaal 25 rijen per batch met een gedeelde verwerkingstiming. De opgeslagen voortgang kan na een herstart verdergaan. Ongeldige rijen worden gemeld terwijl geldige rijen doorgaan.
+
+De eerste 100 rijmeldingen blijven beschikbaar zonder bronwaarden. Recordnummers beginnen bij 2 en tellen niet-lege CSV-records, geen fysieke regels bij cellen met newlines. Bronrijen worden na voltooiing verwijderd; voortgang blijft beschikbaar.

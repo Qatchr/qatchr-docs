@@ -1,0 +1,23 @@
+---
+title: "Taken ophalen"
+description: "Haal taken op met filters voor status, kandidaat, sollicitatie of gebruiker."
+openapi: "/openapi/qatchr.json GET /api/v1/tasks/"
+---
+
+Met `attention=all` (standaard) krijg je taken ongeacht persoonlijke zichtbaarheid. `inbox` sluit verborgen en gesnoozede taken uit; `hidden` selecteert die taken. Voor deze twee filters is `X-User-Id` nodig. De response bevat context zoals `previous_step`, `next_steps`, kandidaat en sollicitatie.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Meer uitleg
+
+Zie [Taken afhandelen](/guides/tasks) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `list_tasks_api_v1_tasks__get`. Route: `app/api/v1/tasks.py` (`list_tasks`).

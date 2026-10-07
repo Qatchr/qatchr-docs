@@ -1,0 +1,17 @@
+---
+title: "Kandidaat ophalen"
+description: "Kandidaat ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/candidates/{candidate_id}"
+---
+
+Kandidaat ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-candidates` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_candidate_api_v1_candidates__candidate_id__get`. Route: `app/api/v1/candidates.py` (`get_candidate`).

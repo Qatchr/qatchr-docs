@@ -1,0 +1,20 @@
+/* Qatchr's existing typography and controls, on top of the native Mintlify theme. */
+:root {
+  --qatchr-ink: #2c1f4d;
+  --qatchr-rounding: 10px;
+}
+
+button,
+.card {
+  border-radius: var(--qatchr-rounding);
+}
+
+#content-area h1,
+#content-area h2,
+#content-area h3 {
+  letter-spacing: -0.025em;
+}
+
+html:not(.dark) #content-area h1 {
+  color: var(--qatchr-ink);
+}

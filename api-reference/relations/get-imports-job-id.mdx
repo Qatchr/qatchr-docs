@@ -1,0 +1,21 @@
+---
+title: "Importstatus ophalen"
+description: "Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie."
+openapi: "/openapi/qatchr.json GET /api/v1/relations/imports/{job_id}"
+---
+
+Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [CSV importeren](/guides/imports) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_import_api_v1_relations_imports__job_id__get`. Route: `app/api/v1/relation_imports.py` (`get_import`).

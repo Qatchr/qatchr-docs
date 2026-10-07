@@ -1,0 +1,26 @@
+---
+title: "Organisatielifecycle (intern)"
+description: "Begrijp de Swagger-calls voor gecoördineerde organisatiewerkzaamheden."
+---
+
+De calls onder `/api/v1/organization-lifecycle` vormen een intern protocol voor gecoördineerde export, herstel en verwijdering. Ze vereisen `X-Lifecycle-Key` en zijn geen reguliere tenantcalls. Deze documentatie neemt ze mee omdat ze zichtbaar zijn in Swagger.
+
+Lifecycleondersteuning en definitieve uitvoering staan standaard uit. `/ready` geeft `503` zolang ondersteuning uitstaat. `/ready/{organization_id}` inventariseert de organisatiegegevens als het protocol beschikbaar is.
+
+## Acties
+
+De action-call accepteert `snapshot`, `freeze`, `restore`, `prepare`, `delete` en `export`. De JSON-body bevat de `id` van het actuele IAM-verwijderverzoek. De handler controleert de actuele IAM-state voordat de actie wordt uitgevoerd:
+
+| Actie | Vereiste toestand |
+| --- | --- |
+| `snapshot`, `freeze` | `pending` |
+| `restore` | `cancelled` |
+| `prepare` | `pending` of `deleting`, met definitieve uitvoering ingeschakeld |
+| `delete` | `deleting`, met definitieve uitvoering ingeschakeld |
+| `export` | `pending` of `cancelled` |
+
+Een verouderd verzoek of ongeldige toestand geeft `409`. Een onbekende actie geeft `404`. `export` retourneert een ZIP-archief (`application/zip`); de huidige Swagger-handler specificeert deze response niet volledig. Andere succesvolle acties geven servicecontext en aantallen.
+
+Dit protocol hangt samen met IAM en andere services. Een request body met alleen een organisatie-ID is niet voldoende: de actuele verwijderrequest-ID en geclaimde toestand moeten kloppen.
+
+Wanneer de lifecycleguard actief is, kan gewone producttoegang tijdens verwijdering `410` of bij een onbereikbare lifecyclecontrole `503` geven. Deze middleware kan plain text retourneren; zie [foutresponses](/guides/errors).

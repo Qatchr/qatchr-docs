@@ -1,0 +1,15 @@
+---
+title: "Taak ophalen"
+description: "Taak ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/tasks/{task_id}"
+---
+
+Taak ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Bron
+
+Swagger-operation: `get_tasks_api_v1_tasks__task_id__get`. Route: `app/api/v1/tasks.py` (`get_tasks`).

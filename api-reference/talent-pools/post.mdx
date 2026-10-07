@@ -1,0 +1,19 @@
+---
+title: "Talentpool aanmaken"
+description: "Talentpool aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json POST /api/v1/talent-pools/"
+---
+
+Talentpool aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-talentpools` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Bron
+
+Swagger-operation: `create_talent_pool_api_v1_talent_pools__post`. Route: `app/api/v1/talent_pools.py` (`create_talent_pool`).

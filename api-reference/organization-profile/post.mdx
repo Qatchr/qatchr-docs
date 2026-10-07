@@ -1,0 +1,17 @@
+---
+title: "Organisatieprofiel aanmaken"
+description: "Organisatieprofiel aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json POST /api/v1/organization-profile/"
+---
+
+Organisatieprofiel aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-organization` binnen scope `organization`.
+
+## Bron
+
+Swagger-operation: `create_organization_profile_api_v1_organization_profile__post`. Route: `app/api/v1/organization_profile.py` (`create_organization_profile`).

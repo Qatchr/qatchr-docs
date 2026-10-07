@@ -1,0 +1,19 @@
+---
+title: "Document ophalen"
+description: "Haal de metadata van een document op."
+openapi: "/openapi/qatchr.json GET /api/v1/documents/{document_id}"
+---
+
+Deze call retourneert `DocumentSchema`, geen bestand of download-URL. Gebruik de aparte `/url`-call om het bestand te downloaden.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Meer uitleg
+
+Zie [Documenten](/guides/documents) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_document_url_api_v1_documents__document_id__get`. Route: `app/api/v1/documents.py` (`get_document_url`).

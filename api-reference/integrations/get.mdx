@@ -1,0 +1,19 @@
+---
+title: "Integraties ophalen"
+description: "Integraties ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/integrations/"
+---
+
+Integraties ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Bron
+
+Swagger-operation: `list_integrations_api_v1_integrations__get`. Route: `app/api/v1/integrations.py` (`list_integrations`).

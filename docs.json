@@ -1,54 +1,418 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Qatchr",
+  "description": "Documentatie voor de Qatchr recruitment API.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
-  },
-  "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
-      {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
-        ]
-      }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    "primary": "#4D35FF",
+    "light": "#AB76FA",
+    "dark": "#5C62F5"
   },
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"
   },
+  "favicon": "/favicon.ico",
+  "fonts": {
+    "family": "Manrope"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Handleidingen",
+        "groups": [
+          {
+            "group": "Aan de slag",
+            "pages": [
+              "index",
+              "quickstart",
+              "guides/authentication",
+              "guides/errors",
+              "guides/pagination"
+            ]
+          },
+          {
+            "group": "Recruitment",
+            "pages": [
+              "guides/applications",
+              "guides/workflows",
+              "guides/tasks",
+              "guides/imports",
+              "guides/tags",
+              "guides/documents",
+              "guides/call-lists"
+            ]
+          },
+          {
+            "group": "Platform",
+            "pages": [
+              "guides/integrations",
+              "guides/ai-credits",
+              "guides/websockets",
+              "guides/organization-lifecycle"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API-referentie",
+        "groups": [
+          {
+            "group": "Overzicht",
+            "pages": [
+              "api-reference/overview"
+            ]
+          },
+          {
+            "group": "Health",
+            "pages": [
+              "api-reference/health-check/get"
+            ]
+          },
+          {
+            "group": "AI-credits",
+            "pages": [
+              "api-reference/ai-credits/get"
+            ]
+          },
+          {
+            "group": "Taken",
+            "pages": [
+              "api-reference/tasks/get",
+              "api-reference/tasks/get-task-id",
+              "api-reference/tasks/post-task-id-handle",
+              "api-reference/tasks/patch-task-id-attention",
+              "api-reference/tasks/patch-task-id-deadline"
+            ]
+          },
+          {
+            "group": "Sollicitaties",
+            "pages": [
+              "api-reference/applications/get",
+              "api-reference/applications/post",
+              "api-reference/applications/get-application-id",
+              "api-reference/applications/post-existing-application",
+              "api-reference/applications/post-candidate-application",
+              "api-reference/applications/patch-application-id",
+              "api-reference/applications/delete-application-id"
+            ]
+          },
+          {
+            "group": "Kandidaten",
+            "pages": [
+              "api-reference/candidates/post-imports-preview",
+              "api-reference/candidates/post-imports",
+              "api-reference/candidates/get-imports-latest",
+              "api-reference/candidates/get-imports-job-id",
+              "api-reference/candidates/get",
+              "api-reference/candidates/post",
+              "api-reference/candidates/get-tags-options",
+              "api-reference/candidates/put-candidate-id-tags",
+              "api-reference/candidates/get-candidate-id",
+              "api-reference/candidates/post-from-cv",
+              "api-reference/candidates/post-from-linkedin-url",
+              "api-reference/candidates/patch-candidate-id",
+              "api-reference/candidates/delete-candidate-id"
+            ]
+          },
+          {
+            "group": "Documenten",
+            "pages": [
+              "api-reference/documents/post",
+              "api-reference/documents/get",
+              "api-reference/documents/get-document-id",
+              "api-reference/documents/get-document-id-url",
+              "api-reference/documents/delete-document-id"
+            ]
+          },
+          {
+            "group": "Processen",
+            "pages": [
+              "api-reference/workflows/get",
+              "api-reference/workflows/post",
+              "api-reference/workflows/get-workflow-id",
+              "api-reference/workflows/patch-workflow-id",
+              "api-reference/workflows/delete-workflow-id"
+            ]
+          },
+          {
+            "group": "Statussen",
+            "pages": [
+              "api-reference/statuses/get",
+              "api-reference/statuses/post",
+              "api-reference/statuses/get-status-id",
+              "api-reference/statuses/patch-status-id",
+              "api-reference/statuses/delete-status-id"
+            ]
+          },
+          {
+            "group": "Vacatures",
+            "pages": [
+              "api-reference/vacancies/get",
+              "api-reference/vacancies/post",
+              "api-reference/vacancies/get-tags-options",
+              "api-reference/vacancies/put-vacancy-id-tags",
+              "api-reference/vacancies/get-vacancy-id",
+              "api-reference/vacancies/post-from-prompt",
+              "api-reference/vacancies/post-from-url",
+              "api-reference/vacancies/patch-vacancy-id",
+              "api-reference/vacancies/delete-vacancy-id"
+            ]
+          },
+          {
+            "group": "Locaties",
+            "pages": [
+              "api-reference/locations/get",
+              "api-reference/locations/post",
+              "api-reference/locations/get-location-id",
+              "api-reference/locations/patch-location-id",
+              "api-reference/locations/delete-location-id"
+            ]
+          },
+          {
+            "group": "Relaties",
+            "pages": [
+              "api-reference/relations/post-imports-preview",
+              "api-reference/relations/post-imports",
+              "api-reference/relations/get-imports-latest",
+              "api-reference/relations/get-imports-job-id",
+              "api-reference/relations/get",
+              "api-reference/relations/post",
+              "api-reference/relations/get-organization",
+              "api-reference/relations/get-tags-options",
+              "api-reference/relations/put-relation-id-tags",
+              "api-reference/relations/get-relation-id",
+              "api-reference/relations/patch-relation-id",
+              "api-reference/relations/delete-relation-id"
+            ]
+          },
+          {
+            "group": "Contactpersonen",
+            "pages": [
+              "api-reference/contact-persons/get",
+              "api-reference/contact-persons/post",
+              "api-reference/contact-persons/get-contact-person-id",
+              "api-reference/contact-persons/patch-contact-person-id",
+              "api-reference/contact-persons/delete-contact-person-id"
+            ]
+          },
+          {
+            "group": "Contracten",
+            "pages": [
+              "api-reference/contracts/get",
+              "api-reference/contracts/post",
+              "api-reference/contracts/get-contract-id",
+              "api-reference/contracts/get-contract-id-url",
+              "api-reference/contracts/patch-contract-id",
+              "api-reference/contracts/delete-contract-id"
+            ]
+          },
+          {
+            "group": "Talentpools",
+            "pages": [
+              "api-reference/talent-pools/get",
+              "api-reference/talent-pools/post",
+              "api-reference/talent-pools/get-talent-pool-id",
+              "api-reference/talent-pools/patch-talent-pool-id",
+              "api-reference/talent-pools/delete-talent-pool-id"
+            ]
+          },
+          {
+            "group": "Bellijsten",
+            "pages": [
+              "api-reference/call-lists/get",
+              "api-reference/call-lists/post",
+              "api-reference/call-lists/get-call-list-id",
+              "api-reference/call-lists/patch-call-list-id",
+              "api-reference/call-lists/delete-call-list-id"
+            ]
+          },
+          {
+            "group": "Integraties",
+            "pages": [
+              "api-reference/integrations/get",
+              "api-reference/integrations/get-links",
+              "api-reference/integrations/post-links",
+              "api-reference/integrations/patch-links-link-id",
+              "api-reference/integrations/delete-links-link-id",
+              "api-reference/integrations/get-links-link-id-get-options-key",
+              "api-reference/integrations/get-integration-id-oauth-start",
+              "api-reference/integrations/get-integration-id-oauth-callback"
+            ]
+          },
+          {
+            "group": "Verbruik",
+            "pages": [
+              "api-reference/resource-usage/get"
+            ]
+          },
+          {
+            "group": "Recruitmentnieuws",
+            "pages": [
+              "api-reference/recruitment-news/get"
+            ]
+          },
+          {
+            "group": "Organisatieprofiel",
+            "pages": [
+              "api-reference/organization-profile/post",
+              "api-reference/organization-profile/delete"
+            ]
+          },
+          {
+            "group": "Organisatielevenscyclus (intern)",
+            "pages": [
+              "api-reference/organization-lifecycle/get-ready",
+              "api-reference/organization-lifecycle/get-ready-organization-id",
+              "api-reference/organization-lifecycle/post-organization-id-action"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Datamodellen",
+        "groups": [
+          {
+            "group": "Swagger-schema’s",
+            "pages": [
+              "models/aicreditbalance",
+              "models/actiontype",
+              "models/applicationcandidatecreate",
+              "models/applicationcreate",
+              "models/applicationexistingcandidatecreate",
+              "models/applicationschema",
+              "models/applicationupdate",
+              "models/assigneetype",
+              "models/body-create-candidate-by-cv-api-v1-candidates-from-cv-post",
+              "models/body-preview-import-api-v1-candidates-imports-preview-post",
+              "models/body-preview-import-api-v1-relations-imports-preview-post",
+              "models/body-start-import-api-v1-candidates-imports-post",
+              "models/body-start-import-api-v1-relations-imports-post",
+              "models/calllistcandidateschema",
+              "models/calllistcreate",
+              "models/calllistrelationschema",
+              "models/calllistschema",
+              "models/calllistupdate",
+              "models/candidateconfig",
+              "models/candidateimportstatus",
+              "models/candidateschema",
+              "models/contactpersoncreate",
+              "models/contactpersonschema",
+              "models/contactpersonupdate",
+              "models/contractcreate",
+              "models/contractschema",
+              "models/contracttype",
+              "models/contractupdate",
+              "models/descriptionblocktype",
+              "models/documentcreatepayload",
+              "models/documentschema",
+              "models/documenttype",
+              "models/education",
+              "models/educationcreate",
+              "models/educationschema",
+              "models/experiencecreate",
+              "models/experiencelevel",
+              "models/experienceschema",
+              "models/filedata",
+              "models/httpvalidationerror",
+              "models/industrycategory",
+              "models/integrationlinkcreateschema",
+              "models/integrationlinkschema",
+              "models/integrationlinkupdateschema",
+              "models/integrationschema",
+              "models/jobcategory",
+              "models/linkedinurl",
+              "models/locationcreate",
+              "models/locationschema",
+              "models/locationupdate",
+              "models/matchingscoreschema",
+              "models/nodetype",
+              "models/organizationprofilecreate",
+              "models/organizationprofileschema",
+              "models/paginatedresponse-applicationschema",
+              "models/paginatedresponse-calllistschema",
+              "models/paginatedresponse-candidateschema",
+              "models/paginatedresponse-contactpersonschema",
+              "models/paginatedresponse-contractschema",
+              "models/paginatedresponse-documentschema",
+              "models/paginatedresponse-integrationlinkschema",
+              "models/paginatedresponse-integrationschema",
+              "models/paginatedresponse-locationschema",
+              "models/paginatedresponse-relationschema",
+              "models/paginatedresponse-statusschema",
+              "models/paginatedresponse-talentpoolschema",
+              "models/paginatedresponse-taskschema",
+              "models/paginatedresponse-vacancyschema",
+              "models/paginatedresponse-workflowschema",
+              "models/recruitmentarticle",
+              "models/relationcreate",
+              "models/relationheadquartersschema",
+              "models/relationimportstatus",
+              "models/relationschema",
+              "models/relationupdate",
+              "models/remotetype",
+              "models/resourceusage",
+              "models/salarycurrency",
+              "models/salaryfrequency",
+              "models/statuscategory",
+              "models/statuscreate",
+              "models/statusschema",
+              "models/statusupdate",
+              "models/tagschema",
+              "models/tagsupdate",
+              "models/talentpoolcandidateschema",
+              "models/talentpoolcreate",
+              "models/talentpoolschema",
+              "models/talentpoolupdate",
+              "models/taskactioncontextschema",
+              "models/taskapplicationcontextschema",
+              "models/taskattentionschema",
+              "models/taskattentionupdate",
+              "models/taskcandidatecontextschema",
+              "models/taskcomplete",
+              "models/taskdeadlineupdate",
+              "models/tasknodecontextschema",
+              "models/taskschema",
+              "models/taskstatus",
+              "models/taskworkflowinstancecontextschema",
+              "models/userprofileschema",
+              "models/vacancycreate",
+              "models/vacancydescription",
+              "models/vacancypromptinput",
+              "models/vacancyschema",
+              "models/vacancyupdate",
+              "models/vacancyurlinput",
+              "models/validationerror",
+              "models/workflowactioncreate",
+              "models/workflowactionoutcomecreate",
+              "models/workflowactionoutcomeschema",
+              "models/workflowactionschema",
+              "models/workflowcreate",
+              "models/workflowformcreate",
+              "models/workflowformschema",
+              "models/workflowinstanceschema",
+              "models/workflownodecreate",
+              "models/workflownodeoutcomecreate",
+              "models/workflownodeoutcomeschema",
+              "models/workflownodeschema",
+              "models/workflowschema",
+              "models/workflowstatus",
+              "models/workflowtransitioncreate",
+              "models/workflowtransitionschema",
+              "models/workflowupdate"
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "label": "Qatchr",
+        "href": "https://qatchr.nl"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -56,17 +420,7 @@
       "view",
       "chatgpt",
       "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
+      "mcp"
     ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
   }
 }

@@ -1,0 +1,17 @@
+---
+title: "Kandidaat aanmaken"
+description: "Kandidaat aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json POST /api/v1/candidates/"
+---
+
+Kandidaat aanmaken via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `create_candidate_api_v1_candidates__post`. Route: `app/api/v1/candidates.py` (`create_candidate`).

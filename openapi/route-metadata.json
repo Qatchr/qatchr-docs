@@ -1,0 +1,1172 @@
+{
+  "GET /health-check": {
+    "source": "main.py",
+    "function": "health_check",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/organization-lifecycle/ready": {
+    "source": "app/services/organization_lifecycle.py",
+    "function": "ready",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/organization-lifecycle/ready/{organization_id}": {
+    "source": "app/services/organization_lifecycle.py",
+    "function": "ready_organization",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "POST /api/v1/organization-lifecycle/{organization_id}/{action}": {
+    "source": "app/services/organization_lifecycle.py",
+    "function": "action",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/ai-credits": {
+    "source": "app/api/v1/ai_credits.py",
+    "function": "get_ai_credits",
+    "permissions": [],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/tasks/": {
+    "source": "app/api/v1/tasks.py",
+    "function": "list_tasks",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/tasks/{task_id}": {
+    "source": "app/api/v1/tasks.py",
+    "function": "get_tasks",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "POST /api/v1/tasks/{task_id}/handle/": {
+    "source": "app/api/v1/tasks.py",
+    "function": "handle_task",
+    "permissions": [],
+    "membership": false,
+    "subscription": true
+  },
+  "PATCH /api/v1/tasks/{task_id}/attention/": {
+    "source": "app/api/v1/tasks.py",
+    "function": "update_task_attention",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PATCH /api/v1/tasks/{task_id}/deadline/": {
+    "source": "app/api/v1/tasks.py",
+    "function": "update_task_deadline",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/applications/": {
+    "source": "app/api/v1/applications.py",
+    "function": "list_applications",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/applications/{application_id}": {
+    "source": "app/api/v1/applications.py",
+    "function": "get_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/applications/": {
+    "source": "app/api/v1/applications.py",
+    "function": "create_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "POST /api/v1/applications/existing-application/": {
+    "source": "app/api/v1/applications.py",
+    "function": "create_existing_candidate_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "POST /api/v1/applications/candidate-application/": {
+    "source": "app/api/v1/applications.py",
+    "function": "create_candidate_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/applications/{application_id}/": {
+    "source": "app/api/v1/applications.py",
+    "function": "update_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/applications/{application_id}/": {
+    "source": "app/api/v1/applications.py",
+    "function": "delete_application",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-applications"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/candidates/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "list_candidates",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/candidates/tags/options": {
+    "source": "app/api/v1/candidates.py",
+    "function": "list_tag_options",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PUT /api/v1/candidates/{candidate_id}/tags/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "replace_tags",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/candidates/{candidate_id}": {
+    "source": "app/api/v1/candidates.py",
+    "function": "get_candidate",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/candidates/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "create_candidate",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/candidates/from-cv/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "create_candidate_by_cv",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/candidates/from-linkedin-url/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "create_candidate_by_linkedin_url",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PATCH /api/v1/candidates/{candidate_id}/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "update_candidate",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/candidates/{candidate_id}/": {
+    "source": "app/api/v1/candidates.py",
+    "function": "delete_candidate",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "POST /api/v1/documents/": {
+    "source": "app/api/v1/documents.py",
+    "function": "create_document",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/documents/": {
+    "source": "app/api/v1/documents.py",
+    "function": "list_candidates",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/documents/{document_id}": {
+    "source": "app/api/v1/documents.py",
+    "function": "get_document_url",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/documents/{document_id}/url": {
+    "source": "app/api/v1/documents.py",
+    "function": "get_document_url",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "DELETE /api/v1/documents/{document_id}/": {
+    "source": "app/api/v1/documents.py",
+    "function": "delete_document",
+    "permissions": [],
+    "membership": false,
+    "subscription": true
+  },
+  "GET /api/v1/workflows/": {
+    "source": "app/api/v1/workflows.py",
+    "function": "list_workflows",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/workflows/{workflow_id}": {
+    "source": "app/api/v1/workflows.py",
+    "function": "get_workflow",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/workflows/": {
+    "source": "app/api/v1/workflows.py",
+    "function": "create_workflow",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/workflows/{workflow_id}/": {
+    "source": "app/api/v1/workflows.py",
+    "function": "update_workflow",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/workflows/{workflow_id}/": {
+    "source": "app/api/v1/workflows.py",
+    "function": "delete_workflow",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/statuses/": {
+    "source": "app/api/v1/statuses.py",
+    "function": "list_statuses",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/statuses/{status_id}": {
+    "source": "app/api/v1/statuses.py",
+    "function": "get_status",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/statuses/": {
+    "source": "app/api/v1/statuses.py",
+    "function": "create_status",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/statuses/{status_id}/": {
+    "source": "app/api/v1/statuses.py",
+    "function": "update_status",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/statuses/{status_id}/": {
+    "source": "app/api/v1/statuses.py",
+    "function": "delete_status",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-pipelines"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/vacancies/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "list_vacancies",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/vacancies/tags/options": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "list_tag_options",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PUT /api/v1/vacancies/{vacancy_id}/tags/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "replace_tags",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/vacancies/{vacancy_id}": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "get_vacancy",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/vacancies/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "create_vacancy",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/vacancies/from-prompt/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "create_vacancy_from_prompt",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/vacancies/from-url/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "create_vacancy_from_url",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PATCH /api/v1/vacancies/{vacancy_id}/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "update_vacancy",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/vacancies/{vacancy_id}/": {
+    "source": "app/api/v1/vacancies.py",
+    "function": "delete_vacancy",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-vacancies"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/locations/": {
+    "source": "app/api/v1/locations.py",
+    "function": "list_locations",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/locations/{location_id}": {
+    "source": "app/api/v1/locations.py",
+    "function": "get_location",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/locations/": {
+    "source": "app/api/v1/locations.py",
+    "function": "create_location",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/locations/{location_id}/": {
+    "source": "app/api/v1/locations.py",
+    "function": "update_location",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/locations/{location_id}/": {
+    "source": "app/api/v1/locations.py",
+    "function": "delete_location",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/relations/": {
+    "source": "app/api/v1/relations.py",
+    "function": "list_relations",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/relations/organization": {
+    "source": "app/api/v1/relations.py",
+    "function": "get_organization_relation",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/relations/tags/options": {
+    "source": "app/api/v1/relations.py",
+    "function": "list_tag_options",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "PUT /api/v1/relations/{relation_id}/tags/": {
+    "source": "app/api/v1/relations.py",
+    "function": "replace_tags",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/relations/{relation_id}": {
+    "source": "app/api/v1/relations.py",
+    "function": "get_relation",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/relations/": {
+    "source": "app/api/v1/relations.py",
+    "function": "create_relation",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/relations/{relation_id}/": {
+    "source": "app/api/v1/relations.py",
+    "function": "update_relation",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/relations/{relation_id}/": {
+    "source": "app/api/v1/relations.py",
+    "function": "delete_relation",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/contact-persons/": {
+    "source": "app/api/v1/contact_persons.py",
+    "function": "list_contact_persons",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/contact-persons/{contact_person_id}": {
+    "source": "app/api/v1/contact_persons.py",
+    "function": "get_contact_person",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/contact-persons/": {
+    "source": "app/api/v1/contact_persons.py",
+    "function": "create_contact_person",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/contact-persons/{contact_person_id}/": {
+    "source": "app/api/v1/contact_persons.py",
+    "function": "update_contact_person",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/contact-persons/{contact_person_id}/": {
+    "source": "app/api/v1/contact_persons.py",
+    "function": "delete_contact_person",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/contracts/": {
+    "source": "app/api/v1/contracts.py",
+    "function": "list_contracts",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/contracts/{contract_id}": {
+    "source": "app/api/v1/contracts.py",
+    "function": "get_contract",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/contracts/{contract_id}/url": {
+    "source": "app/api/v1/contracts.py",
+    "function": "get_contract_url",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/contracts/": {
+    "source": "app/api/v1/contracts.py",
+    "function": "create_contract",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/contracts/{contract_id}/": {
+    "source": "app/api/v1/contracts.py",
+    "function": "update_contract",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/contracts/{contract_id}/": {
+    "source": "app/api/v1/contracts.py",
+    "function": "delete_contract",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/talent-pools/": {
+    "source": "app/api/v1/talent_pools.py",
+    "function": "list_talent_pools",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-talentpools"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/talent-pools/{talent_pool_id}": {
+    "source": "app/api/v1/talent_pools.py",
+    "function": "get_talent_pool",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-talentpools"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/talent-pools/": {
+    "source": "app/api/v1/talent_pools.py",
+    "function": "create_talent_pool",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-talentpools"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/talent-pools/{talent_pool_id}/": {
+    "source": "app/api/v1/talent_pools.py",
+    "function": "update_talent_pool",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-talentpools"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/talent-pools/{talent_pool_id}/": {
+    "source": "app/api/v1/talent_pools.py",
+    "function": "delete_talent_pool",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-talentpools"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/call-lists/": {
+    "source": "app/api/v1/call_lists.py",
+    "function": "list_call_lists",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/call-lists/{call_list_id}": {
+    "source": "app/api/v1/call_lists.py",
+    "function": "get_call_list",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/call-lists/": {
+    "source": "app/api/v1/call_lists.py",
+    "function": "create_call_list",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "PATCH /api/v1/call-lists/{call_list_id}/": {
+    "source": "app/api/v1/call_lists.py",
+    "function": "update_call_list",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "DELETE /api/v1/call-lists/{call_list_id}/": {
+    "source": "app/api/v1/call_lists.py",
+    "function": "delete_call_list",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-relations"
+      },
+      {
+        "scope": "qatchr",
+        "permission": "view-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/integrations/": {
+    "source": "app/api/v1/integrations.py",
+    "function": "list_integrations",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/integrations/links/": {
+    "source": "app/api/v1/integrations.py",
+    "function": "list_integration_links",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "POST /api/v1/integrations/links/": {
+    "source": "app/api/v1/integrations.py",
+    "function": "create_integration_link",
+    "permissions": [],
+    "membership": false,
+    "subscription": true
+  },
+  "PATCH /api/v1/integrations/links/{link_id}": {
+    "source": "app/api/v1/integrations.py",
+    "function": "update_integration_link",
+    "permissions": [],
+    "membership": false,
+    "subscription": true
+  },
+  "DELETE /api/v1/integrations/links/{link_id}": {
+    "source": "app/api/v1/integrations.py",
+    "function": "delete_integration_link",
+    "permissions": [],
+    "membership": false,
+    "subscription": true
+  },
+  "GET /api/v1/integrations/links/{link_id}/get-options/{key}": {
+    "source": "app/api/v1/integrations.py",
+    "function": "get_integration_link_options",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/integrations/{integration_id}/oauth/start": {
+    "source": "app/api/v1/integrations.py",
+    "function": "oauth_start",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/integrations/{integration_id}/oauth/callback": {
+    "source": "app/api/v1/integrations.py",
+    "function": "oauth_callback",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/resource-usage": {
+    "source": "app/api/v1/resource_usage.py",
+    "function": "get_resource_usage",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "GET /api/v1/recruitment-news/": {
+    "source": "app/api/v1/recruitment_news.py",
+    "function": "list_recruitment_news",
+    "permissions": [],
+    "membership": false,
+    "subscription": false
+  },
+  "POST /api/v1/organization-profile/": {
+    "source": "app/api/v1/organization_profile.py",
+    "function": "create_organization_profile",
+    "permissions": [
+      {
+        "scope": "organization",
+        "permission": "manage-organization"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "DELETE /api/v1/organization-profile/": {
+    "source": "app/api/v1/organization_profile.py",
+    "function": "delete_organization_profile",
+    "permissions": [
+      {
+        "scope": "organization",
+        "permission": "manage-organization"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/candidates/imports/preview": {
+    "source": "app/api/v1/candidate_imports.py",
+    "function": "preview_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/candidates/imports": {
+    "source": "app/api/v1/candidate_imports.py",
+    "function": "start_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/candidates/imports/latest": {
+    "source": "app/api/v1/candidate_imports.py",
+    "function": "latest_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/candidates/imports/{job_id}": {
+    "source": "app/api/v1/candidate_imports.py",
+    "function": "get_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-candidates"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/relations/imports/preview": {
+    "source": "app/api/v1/relation_imports.py",
+    "function": "preview_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "POST /api/v1/relations/imports": {
+    "source": "app/api/v1/relation_imports.py",
+    "function": "start_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": true
+  },
+  "GET /api/v1/relations/imports/latest": {
+    "source": "app/api/v1/relation_imports.py",
+    "function": "latest_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  },
+  "GET /api/v1/relations/imports/{job_id}": {
+    "source": "app/api/v1/relation_imports.py",
+    "function": "get_import",
+    "permissions": [
+      {
+        "scope": "qatchr",
+        "permission": "manage-relations"
+      }
+    ],
+    "membership": true,
+    "subscription": false
+  }
+}

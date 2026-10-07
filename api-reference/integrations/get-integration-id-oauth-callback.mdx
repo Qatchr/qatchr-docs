@@ -1,0 +1,19 @@
+---
+title: "OAuth-callback verwerken"
+description: "Verwerk de redirect van een OAuth-provider."
+openapi: "/openapi/qatchr.json GET /api/v1/integrations/{integration_id}/oauth/callback"
+---
+
+Deze call is bedoeld als callback voor de provider. De handler valideert gesigneerde state, slaat de koppeling op en redirect naar de frontend. Providerqueryvelden zoals `code` en `state` worden uit de Request gelezen en staan niet expliciet in Swagger. De runtime-redirect is standaard `307`.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Meer uitleg
+
+Zie [OAuth-integraties](/guides/integrations) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `oauth_callback_api_v1_integrations__integration_id__oauth_callback_get`. Route: `app/api/v1/integrations.py` (`oauth_callback`).

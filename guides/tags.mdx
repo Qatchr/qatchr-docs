@@ -1,0 +1,18 @@
+---
+title: "Gedeelde tags"
+description: "Gebruik één tagcatalogus voor kandidaten, vacatures en relaties."
+---
+
+Tags horen bij een organisatie. Kandidaten, vacatures en relaties delen dezelfde tagcatalogus. De responses bevatten `tags` met `id` en `name`.
+
+Gebruik `GET /tags/options` onder de relevante resource om beschikbare tags op te halen. Met `PUT /{resource_id}/tags/` vervang je alle koppelingen van één record:
+
+```json
+{ "names": ["Frontend", "Vue.js"] }
+```
+
+Een lege `names`-array wist de koppelingen. De tag zelf blijft bestaan voor andere records. Namen worden getrimd en hoofdletterongevoelig ontdubbeld binnen de organisatie. Iedere naam is maximaal 80 tekens; een record kan maximaal 50 tags hebben.
+
+Normale create- en updatecalls wijzigen deze koppelingen niet. Gebruik de dedicated tagcall. Verwijderde of geanonimiseerde kandidaten kunnen niet worden getagd; anonimiseren verwijdert hun tagkoppelingen.
+
+Filter een lijst met herhaalde `tag_ids`-querykeys. Het record moet aan alle opgegeven tags voldoen. De gewone `search`-parameter zoekt ook in tagnamen.

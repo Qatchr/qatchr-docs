@@ -1,0 +1,19 @@
+---
+title: "Talentpool verwijderen"
+description: "Talentpool verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json DELETE /api/v1/talent-pools/{talent_pool_id}/"
+---
+
+Talentpool verwijderen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-talentpools` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Bron
+
+Swagger-operation: `delete_talent_pool_api_v1_talent_pools__talent_pool_id___delete`. Route: `app/api/v1/talent_pools.py` (`delete_talent_pool`).

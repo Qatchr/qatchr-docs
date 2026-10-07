@@ -1,0 +1,47 @@
+---
+title: "Foutresponses"
+description: "Herken validatiefouten, toegangsproblemen en externe storingen."
+---
+
+Controleer eerst de HTTP-status. Succesresponses zijn meestal JSON; een `204` heeft geen body. Parse een lege response daarom niet met `response.json()`.
+
+## Gestructureerde API-fout
+
+`APIException` gebruikt FastAPI’s `detail`-envelope:
+
+```json
+{
+  "detail": {
+    "error_code": "NOT_FOUND",
+    "message": "Requested resource does not exist.",
+    "display_message": "exception.notFound"
+  }
+}
+```
+
+`display_message` is een vertaalsleutel. Gebruik `error_code` voor eigen foutafhandeling. De concrete `message` verschilt per resource.
+
+## Validatiefout
+
+FastAPI-validatie gebruikt HTTP `422` met een lijst in `detail`. De entries beschrijven onder andere het fouttype, de locatie (`body`, `query`, `path` of `header`) en een melding. Controleer verplichte velden, UUID’s, enumwaarden en de veldtypen in de endpointreferentie.
+
+Een verplicht veld met een nullable type mag `null` zijn maar moet nog steeds aanwezig zijn. Een optioneel veld mag je weglaten. Bij PATCH is dat verschil relevant: raadpleeg het specifieke schema en de endpointuitleg in plaats van aan te nemen dat iedere PATCH dezelfde regels heeft.
+
+| Status | Betekenis en afhandeling |
+| --- | --- |
+| `400` | Ongeldige businessinvoer of ontbrekende organisatiecontext. Corrigeer het verzoek. |
+| `401` | Ontbrekende authenticatie of context; controleer token en headers. |
+| `402` | Bijvoorbeeld `INSUFFICIENT_AI_CREDITS`; controleer saldo en toegang. |
+| `403` | Geweigerd recht, functievoorwaarde of lifecyclecredential. |
+| `404` | Resource niet gevonden binnen de beschikbare context. |
+| `409` | Bijvoorbeeld een verouderd of ongeldig lifecycleverzoek. |
+| `410` | Organisatie wordt verwijderd of is verwijderd wanneer de lifecycleguard actief is. |
+| `422` | Ongeldige parameters, velden of sortering. |
+| `502` / `504` | Externe verificatie of feed is onbereikbaar of te traag. |
+| `503` | Bijvoorbeeld uitgeschakelde lifecycleondersteuning of onbeschikbare lifecycleservice. |
+
+## Niet iedere fout heeft hetzelfde formaat
+
+Sommige `HTTPException`-handlers sturen een string in `detail`. De lifecycleguard kan plain text retourneren. Laat je client zowel objecten, arrays, strings als niet-JSON-bodies verwerken.
+
+Herhaal mutaties niet blind na een timeout: de eerste aanvraag kan verwerkt zijn. Er is geen algemene, gedocumenteerde idempotency-key voor deze API. Controleer de resource of importjob voordat je opnieuw een record aanmaakt.

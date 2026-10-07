@@ -1,0 +1,23 @@
+---
+title: "Sollicitatie aanmaken"
+description: "Maak een sollicitatie aan via het referentienummer van een vacature."
+openapi: "/openapi/qatchr.json POST /api/v1/applications/"
+---
+
+Stuur `reference_number` en kandidaatdetails. Optionele cv- en motivatiebestanden gebruiken `FileData` met base64-data, geen multipart-upload. Dit is een andere invoervorm dan de calls met `vacancy_id`.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Sollicitaties](/guides/applications) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_application_api_v1_applications__post`. Route: `app/api/v1/applications.py` (`create_application`).

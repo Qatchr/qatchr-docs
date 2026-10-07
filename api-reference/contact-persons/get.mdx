@@ -1,0 +1,21 @@
+---
+title: "Contactpersonen ophalen"
+description: "Contactpersonen ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/contact-persons/"
+---
+
+Contactpersonen ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+## Lijsten ophalen
+
+Gebruik de ondersteunde filters voor deze call. [Paginering en sortering](/guides/pagination) beschrijft hoe je meerdere pagina’s ophaalt.
+
+## Bron
+
+Swagger-operation: `list_contact_persons_api_v1_contact_persons__get`. Route: `app/api/v1/contact_persons.py` (`list_contact_persons`).

@@ -1,0 +1,35 @@
+---
+title: "Taken afhandelen"
+description: "Gebruik acties, deadlines en persoonlijke taakvoorkeuren."
+---
+
+Taken horen bij een workflowinstance, node en actie. De detailresponse kan kandidaat- en sollicitatiecontext, het formulierschema, uitkomsten, `previous_step` en `next_steps` bevatten.
+
+## Een taak afronden
+
+Haal de taak op en lees de invoervelden uit `action.form.ui_template`. Gebruik een beschikbare uitkomst uit `action.outcomes`. Stuur de formuliervelden in `result_json` en de gekozen uitkomst als `outcome_key` naar `POST /api/v1/tasks/{task_id}/handle/`.
+
+```json
+{
+  "result_json": { "notes": "Gesprek afgerond" },
+  "outcome_key": "<beschikbare-uitkomstkey>"
+}
+```
+
+`notes` is alleen een voorbeeldveld: jouw formulier bepaalt welke keys geldig zijn. Een planningsactie kan `scheduled_start_at` en `scheduled_end_at` gebruiken. Het workflowmechanisme bepaalt welke actie of stap daarna actief wordt.
+
+## Deadline versus snooze
+
+Een deadline (`due_at`) hoort bij de gedeelde taak. Een snoozevoorkeur hoort bij de huidige gebruiker en verplaatst die deadline niet.
+
+```json
+{ "action": "snooze", "snoozed_until": "2027-01-12T09:00:00+01:00" }
+```
+
+Kies bij gebruik een tijd die nog in de toekomst ligt. `dismiss` verbergt de taak; `restore` maakt haar weer zichtbaar. Snooze en dismiss ronden de taak niet af en wijzigen de toewijzing of processtap niet.
+
+Voor een persoonlijke inbox gebruik je `attention=inbox` en `X-User-Id`. `attention=hidden` toont verborgen taken; `all` is de standaard. Verlopen snoozevoorkeuren maken de taak opnieuw zichtbaar bij een volgende query. Dit is geen e-mail- of pushherinnering.
+
+## Context
+
+`previous_step` is de andere node van de laatst afgeronde taak. `next_steps` bevat de daadwerkelijk beschikbare overgangsbestemmingen; meerdere namen zijn alternatieven. Leid niet zelf een deadline af uit de aanmaakdatum.

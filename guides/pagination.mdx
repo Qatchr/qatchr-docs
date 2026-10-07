@@ -1,0 +1,38 @@
+---
+title: "Paginering, filters en sortering"
+description: "Haal volledige lijsten op met offset en limit."
+---
+
+Lijstcalls met een gepagineerd responsemodel geven `results` en `total_count` terug. De meeste lijsten gebruiken `offset=0` en `limit=10`; integratielijsten gebruiken standaard `limit=100`. Een limiet boven 100 is bij deze gepagineerde routes niet toegestaan. Gebruik de exacte grenzen van de betreffende call; niet alle routes declareren dezelfde ondergrens.
+
+```json
+{ "results": [], "total_count": 0 }
+```
+
+Verhoog `offset` met het aantal ontvangen resultaten. Stop bij een lege pagina of zodra je het totale aantal hebt opgehaald. `total_count` hoort bij de actuele filters. Een gewone arrayresponse, zoals recruitmentnieuws, heeft deze envelope niet.
+
+## Filters
+
+Filters zijn endpointspecifiek. Sollicitaties ondersteunen onder andere `candidate_id`, `vacancy_id`, `status_id`, `recruiter` en `hiring_manager`. Kandidaten en vacatures gebruiken voor verantwoordelijken `recruiter_id` en `hiring_manager_id`. Gebruik de namen uit de referentie; ze zijn niet overal gelijk.
+
+Voor tags herhaal je de querykey: `?tag_ids=<uuid>&tag_ids=<uuid>`. Het record moet aan **alle** gevraagde tags voldoen. Filters worden vóór tellen en pagineren toegepast.
+
+## Sortering
+
+Lijsten met `sort_by` en `sort_order` ondersteunen `asc` en `desc`. Zonder beide parameters blijft de standaard `updated_at DESC` behouden. Met alleen `sort_by` wordt de richting `asc`. Met alleen `sort_order` sorteer je `updated_at` in die richting.
+
+Alle hieronder genoemde sorteerbare lijsten ondersteunen `id`, `created_at`, `updated_at` en de aliases `createdAt`, `updatedAt`.
+
+| Resource | Aanvullende sorteerkeys |
+| --- | --- |
+| Vacatures | `title`, `name`, `status`, `reference_number`, `salary_min`, `salary_max`, `salary`, `publish_date`, `expiration_date`, `application_count`, `applicationCount` |
+| Sollicitaties | `name`, `vacancy`, `status`, `match_score`, `matchScore`, `terminal_status_at` |
+| Kandidaten | `name`, `first_name`, `last_name`, `email`, `phone_number`, `location_city`, `location_country`, `location` |
+| Talentpools | `name`, `description`, `candidate_count`, `candidates` |
+| Locaties | `name`, `address`, `zipcode`, `city`, `state`, `country`, `is_default` |
+| Relaties | `name`, `vacancy_count`, `applicant_count`, `hire_count`, `vacancies`, `applicants`, `hires` |
+| Contactpersonen | `name`, `first_name`, `last_name`, `email`, `phone_number` |
+| Processen | `name`, `is_active`, `is_default`, `application_count`, `applicationCount` |
+| Statussen | `name`, `description`, `status_category`, `category`, `is_terminal` |
+
+Tekst wordt in de database hoofdletterongevoelig gesorteerd; `null` staat in beide richtingen achteraan. Gelijke waarden worden op `id ASC` geordend. Onbekende keys leveren `422` op met `allowed_fields`. Taken hebben eigen deadlinegerichte sortering en bieden deze algemene sorteerparameters niet aan.

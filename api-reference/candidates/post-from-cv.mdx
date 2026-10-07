@@ -1,0 +1,21 @@
+---
+title: "Kandidaat uit een cv aanmaken"
+description: "Maak kandidaatdata op basis van een cv-upload."
+openapi: "/openapi/qatchr.json POST /api/v1/candidates/from-cv/"
+---
+
+Stuur het bestand als multipartveld `cv`. Dit doet een externe AI-aanvraag en kost een AI-credit. Swagger specificeert de succesvolle response als `Any`, dus de huidige specificatie garandeert hier geen concreet responsemodel.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [AI-credits](/guides/ai-credits) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_candidate_by_cv_api_v1_candidates_from_cv__post`. Route: `app/api/v1/candidates.py` (`create_candidate_by_cv`).

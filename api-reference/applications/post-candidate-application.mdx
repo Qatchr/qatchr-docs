@@ -1,0 +1,23 @@
+---
+title: "Sollicitatie voor een kandidaat aanmaken"
+description: "Maak een sollicitatie voor een bestaande of nieuwe kandidaat."
+openapi: "/openapi/qatchr.json POST /api/v1/applications/candidate-application/"
+---
+
+Stuur `vacancy_id` en precies één van `candidate_id` of `candidate`. Beide of geen van beide levert een validatiefout op.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Sollicitaties](/guides/applications) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_candidate_application_api_v1_applications_candidate_application__post`. Route: `app/api/v1/applications.py` (`create_candidate_application`).

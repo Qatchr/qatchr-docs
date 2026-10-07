@@ -1,0 +1,15 @@
+---
+title: "Nieuwsberichten ophalen"
+description: "Haal beschikbare recruitmentartikelen op."
+openapi: "/openapi/qatchr.json GET /api/v1/recruitment-news/"
+---
+
+De response is een lijst met `RecruitmentArticle`-objecten. Als de externe feed niet beschikbaar of ongeldig is, retourneert de handler `502` met een string in `detail`.
+
+## Toegang
+
+De route definieert geen permission-check of organisatieheader.
+
+## Bron
+
+Swagger-operation: `list_recruitment_news_api_v1_recruitment_news__get`. Route: `app/api/v1/recruitment_news.py` (`list_recruitment_news`).

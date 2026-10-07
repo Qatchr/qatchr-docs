@@ -1,0 +1,30 @@
+---
+title: "Documenten en downloadlinks"
+description: "Upload bestanden en haal tijdelijke download-URL’s op."
+---
+
+Er zijn meerdere bestandsvormen. De documentcreate-call en optionele bestanden bij sollicitatiecreate gebruiken JSON met `FileData`. Cv-extractie en CSV-import gebruiken multipart. Kies de vorm van de specifieke endpointreferentie.
+
+## JSON-upload
+
+```json
+{
+  "type": "CV",
+  "candidate_id": "22222222-2222-4222-8222-222222222222",
+  "file_data": {
+    "file_name": "cv.pdf",
+    "data": "<base64-bestandsdata>",
+    "content_type": "application/pdf"
+  }
+}
+```
+
+`<base64-bestandsdata>` is een placeholder voor het gecodeerde bestand. Het documenttype is `CV` of `MOTIVATION_LETTER`. De metadataresponse bevat de koppeling en `blob_name`; dit is geen downloadlink.
+
+## Downloaden
+
+Haal `/api/v1/documents/{document_id}/url` op. De response is een JSON-string met een signed URL die vijf minuten geldig is. Gebruik die URL om het bestand op te halen en vraag een nieuwe URL aan als deze verlopen is.
+
+Contracten hebben een eigen `/api/v1/contracts/{contract_id}/url`-call; raadpleeg daarvoor de contractreferentie. Veronderstel niet dat elk bestandendpoint dezelfde response of levensduur gebruikt.
+
+De documentdelete-call heeft in Swagger HTTP `200`, terwijl de meeste andere delete-calls HTTP `204` gebruiken. Houd hier in je responseverwerking rekening mee.

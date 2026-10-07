@@ -1,0 +1,21 @@
+---
+title: "Integratiekoppeling aanmaken"
+description: "Maak een generieke integratiekoppeling aan."
+openapi: "/openapi/qatchr.json POST /api/v1/integrations/links/"
+---
+
+OAuth-integraties moeten eerst hun providerflow afronden. De generieke POST kan die flow niet vervangen.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [OAuth-integraties](/guides/integrations) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_integration_link_api_v1_integrations_links__post`. Route: `app/api/v1/integrations.py` (`create_integration_link`).

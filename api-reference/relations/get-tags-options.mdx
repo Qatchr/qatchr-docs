@@ -1,0 +1,21 @@
+---
+title: "Beschikbare tags ophalen"
+description: "Haal de organisatiebrede tagcatalogus op."
+openapi: "/openapi/qatchr.json GET /api/v1/relations/tags/options"
+---
+
+Kandidaten, vacatures en relaties delen dezelfde catalogus. Verwijderen van een koppeling verwijdert de gedeelde tag niet.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [Gedeelde tags](/guides/tags) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `list_tag_options_api_v1_relations_tags_options_get`. Route: `app/api/v1/relations.py` (`list_tag_options`).

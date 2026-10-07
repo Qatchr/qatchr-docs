@@ -1,55 +1,65 @@
-# Mintlify Starter Kit
+# Qatchr documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Nederlandstalige Mintlify-documentatie voor Qatchr. De eerste versie beschrijft alle 104 HTTP-calls en 125 schema’s uit de Swagger-specificatie van de lokale API op 6 oktober 2026.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Inhoud
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+- `index.mdx`, `quickstart.mdx` en `guides/`: introductie, authenticatie, fouten, paginering en recruitmentflows.
+- `api-reference/`: een MDX-pagina voor iedere Swagger-operation, inclusief bronverwijzing en gedeclareerde rechten.
+- `models/`: alle response-, invoer- en enum-schema’s uit Swagger.
+- `openapi/swagger.json`: ongewijzigde export van `app.openapi()`.
+- `openapi/route-metadata.json`: rechten, scopes en subscriptiondecorators uit de routebron.
+- `openapi/qatchr.json`: documentatieversie met Nederlandse titels, toelichting en expliciete securitymetadata voor de routes die deze checks hebben.
+- `endpoint-notes.json`: handgeschreven endpointtoelichting; wordt bewaard bij regenereren.
+- `docs.json`, `logo/`, `favicon.ico`, `custom.css`: Mintlify-configuratie en bestaande Qatchr-huisstijl.
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+De voorbeelden gebruiken fictieve ID’s en `https://api.example.com`. Er is geen productie-API-origin ingevuld. De playground toont voorbeelden zonder requests naar een gegokte server te sturen. Voeg een geverifieerde `servers`-configuratie toe aan de generator wanneer de gewenste API-origin bekend is.
 
-## AI-assisted writing
+## Lokaal bekijken
 
-Set up your AI coding tool to work with Mintlify:
+Gebruik de geïnstalleerde Mintlify CLI:
 
-```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
-npm i -g mint
-```
-
-Run the following command at the root of your documentation, where your `docs.json` is located:
-
-```
+```sh
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Als de CLI ontbreekt, volg [Mintlify’s installatiehandleiding](https://www.mintlify.com/docs/installation). Een lokale preview publiceert de site niet.
 
-## Publishing changes
+## API-documentatie bijwerken
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Gebruik de bestaande Pythonomgeving van de backend; deze repo voegt geen backenddependencies toe. Vanuit `qatchr-api`:
 
-## Need help?
+```sh
+poetry run python ../qatchr-docs/scripts/export_openapi.py --backend .
+```
 
-### Troubleshooting
+Vanuit `qatchr-docs`:
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+```sh
+python3 scripts/generate_reference.py
+```
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+De export importeert de FastAPI-app en roept `app.openapi()` aan. Hij start geen lifespan, achtergrondwerkers of server en voert geen endpointrequests uit. Dummy PostgreSQL-instellingen maken alleen de lazy engineconstructie bij import mogelijk; er wordt geen databaseverbinding geopend. De bestaande backendomgeving moet wel de dependencies uit haar pyproject bevatten.
+
+De generator overschrijft gegenereerde endpointpagina’s, modelpagina’s, het overzicht en `docs.json`. Bewaar endpointteksten daarom in `endpoint-notes.json` en pas siteconfiguratie aan in de generator. Handleidingen blijven handmatig bewerkbaar. Bij verwijderde routes/schema’s blijven oude paginafiles liggen: verwijder deze na review; ze worden niet opnieuw in navigatie opgenomen. De exporter controleert dat iedere Swagger-call routemetadata heeft. Nieuwe routes met onbekende resources vragen ook om uitbreiding van `RESOURCES` in de generator.
+
+Controleer bij een refresh ook de inhoudelijke handleidingen: OpenAPI specificeert niet alle runtimefouten, quota, validatorregels, redirects of dynamische responses. Broncode heeft voor die details voorrang. De beschikbare backend Pythonomgeving kan een andere FastAPI-versie hebben dan pyproject; exporteer voor releasegebruik vanuit de omgeving van die release.
+
+## Validatie en publiceren
+
+De initiële wijziging is statisch gecontroleerd op endpointdekking, schemareferenties, navigatie en lokale links. Er zijn geen API-calls, backendtests, builds, linting of typechecks uitgevoerd.
+
+Op expliciet verzoek kun je de Mintlify-validatie uitvoeren:
+
+```sh
+mint validate
+mint broken-links
+```
+
+Koppel de repository in het Mintlify-dashboard om te publiceren. Review de documentatiebranch voordat je deze naar de ingestelde deploymentbranch brengt. De koppeling of publicatie wordt door het maken van deze bestanden niet uitgevoerd.
+
+## Mintlify-documentatie
+
+- [OpenAPI-endpoints en schema’s in MDX](https://www.mintlify.com/docs/api-playground/openapi-setup)
+- [Siteconfiguratie](https://www.mintlify.com/docs/organize/settings)
+- [Lettertypen](https://www.mintlify.com/docs/customize/fonts)

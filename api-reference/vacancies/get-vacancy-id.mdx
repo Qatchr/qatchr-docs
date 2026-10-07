@@ -1,0 +1,17 @@
+---
+title: "Vacature ophalen"
+description: "Vacature ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/vacancies/{vacancy_id}"
+---
+
+Vacature ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-vacancies` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_vacancy_api_v1_vacancies__vacancy_id__get`. Route: `app/api/v1/vacancies.py` (`get_vacancy`).

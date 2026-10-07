@@ -1,0 +1,29 @@
+---
+title: "Bellijst wijzigen"
+description: "Beheer bellijsten met kandidaten en relaties."
+openapi: "/openapi/qatchr.json PATCH /api/v1/call-lists/{call_list_id}/"
+---
+
+Bellijsten zijn beschikbaar voor recruitmenttype `others` of `selfAndOthers`. Aanmaken gebruikt `candidate_ids` en `relation_ids`. Bij wijzigen vervangt een aangeleverde lijst de gekoppelde IDs; laat een veld weg om die koppelingen te behouden. Verwijderde en geanonimiseerde kandidaten worden niet getoond.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-relations` binnen scope `qatchr`.
+
+Vereist recht: `view-candidates` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+Alle bellijstcalls vereisen daarnaast recruitmenttype `others` of `selfAndOthers`. Zie [bellijsten](/guides/call-lists).
+
+## Meer uitleg
+
+Zie [Bellijsten](/guides/call-lists) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `update_call_list_api_v1_call_lists__call_list_id___patch`. Route: `app/api/v1/call_lists.py` (`update_call_list`).

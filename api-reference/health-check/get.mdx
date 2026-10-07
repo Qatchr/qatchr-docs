@@ -1,0 +1,15 @@
+---
+title: "API-beschikbaarheid controleren"
+description: "Controleer of de API een HTTP-response kan geven."
+openapi: "/openapi/qatchr.json GET /health-check"
+---
+
+Geeft `{"message":"OK"}` terug. Deze handler controleert geen database, IAM, opslag of achtergrondwerkers; een succesvolle response bewijst alleen dat de handler bereikbaar is.
+
+## Toegang
+
+De route definieert geen permission-check of organisatieheader.
+
+## Bron
+
+Swagger-operation: `health_check_health_check_get`. Route: `main.py` (`health_check`).

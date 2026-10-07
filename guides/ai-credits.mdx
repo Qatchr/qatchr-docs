@@ -1,0 +1,16 @@
+---
+title: "AI-credits en verbruik"
+description: "Controleer het saldo voordat je externe AI-aanvragen doet."
+---
+
+`GET /api/v1/ai-credits` geeft `credits` en `request_cost` voor de organisatie. Een organisatie zonder bestaande creditbalans begint met 100 credits; die allowance wordt na initialisatie niet opnieuw toegepast.
+
+Elke externe AI-aanvraag kost één credit: cv-parsing, LinkedIn-verrijking, vacaturegeneratie, vacature-URL-import, matching en taaksamenvattingen. Het saldo wordt vóór de externe aanvraag atomisch verlaagd. Ook een providerfout of timeout kost een credit. Er is geen automatisch resetmoment of verloopdatum.
+
+```json
+{ "credits": 100, "request_cost": 1 }
+```
+
+Bij onvoldoende saldo geeft een interactieve AI-call `402 INSUFFICIENT_AI_CREDITS`; er wordt dan geen providerrequest gestuurd. Automatische matching wordt overgeslagen en automatische taaksamenvattingen kunnen op een lokale fallback terugvallen. Gewone functionaliteit blijft beschikbaar.
+
+Er is geen tenant-facing API-call om credits toe te voegen. Beschrijf daarom geen creditpurchase-endpoint in een integratie. `GET /api/v1/resource-usage` rapporteert andere resourceaantallen en vervangt de creditbalans niet.

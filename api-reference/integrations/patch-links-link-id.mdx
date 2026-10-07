@@ -1,0 +1,17 @@
+---
+title: "Integratiekoppeling wijzigen"
+description: "Integratiekoppeling wijzigen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json PATCH /api/v1/integrations/links/{link_id}"
+---
+
+Integratiekoppeling wijzigen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Bron
+
+Swagger-operation: `update_integration_link_api_v1_integrations_links__link_id__patch`. Route: `app/api/v1/integrations.py` (`update_integration_link`).

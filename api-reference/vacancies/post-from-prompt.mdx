@@ -1,0 +1,21 @@
+---
+title: "Vacature met AI genereren"
+description: "Genereer een vacature met een locatie, tone of voice en keywords."
+openapi: "/openapi/qatchr.json POST /api/v1/vacancies/from-prompt/"
+---
+
+Stuur de velden uit `VacancyPromptInput`. De call gebruikt een externe AI-aanvraag en kost een AI-credit.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-vacancies` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [AI-credits](/guides/ai-credits) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_vacancy_from_prompt_api_v1_vacancies_from_prompt__post`. Route: `app/api/v1/vacancies.py` (`create_vacancy_from_prompt`).

@@ -1,0 +1,19 @@
+---
+title: "OAuth-verbinding starten"
+description: "Start de OAuth authorization-codeflow voor een integratie."
+openapi: "/openapi/qatchr.json GET /api/v1/integrations/{integration_id}/oauth/start"
+---
+
+Gebruik queryparameters `organization_id` en `user_id`. De handler retourneert een redirect naar de provider met gesigneerde state. Swagger vermeldt een generieke `200`, maar `RedirectResponse` gebruikt hier standaard `307`; volg de browserredirect.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Meer uitleg
+
+Zie [OAuth-integraties](/guides/integrations) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `oauth_start_api_v1_integrations__integration_id__oauth_start_get`. Route: `app/api/v1/integrations.py` (`oauth_start`).

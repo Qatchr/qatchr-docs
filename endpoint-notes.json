@@ -1,0 +1,278 @@
+{
+  "GET /health-check": {
+    "description": "Controleer of de API een HTTP-response kan geven.",
+    "body": "Geeft `{\"message\":\"OK\"}` terug. Deze handler controleert geen database, IAM, opslag of achtergrondwerkers; een succesvolle response bewijst alleen dat de handler bereikbaar is."
+  },
+  "GET /api/v1/applications/{application_id}": {
+    "description": "Haal een sollicitatie inclusief kandidaat, vacature en huidige workflowstap op.",
+    "body": "De response bevat `workflow_instance.workflow_id` en `workflow_instance.current_node_id` met `current_node`. De volledige processtructuur is geen top-level `workflow` in deze response. Haal die apart op met `GET /api/v1/workflows/{workflow_id}`. `status` is de sollicitatiestatus; de huidige processtap kan een andere naam hebben.",
+    "guide": "/guides/applications",
+    "guide_title": "Sollicitaties"
+  },
+  "POST /api/v1/applications/": {
+    "description": "Maak een sollicitatie aan via het referentienummer van een vacature.",
+    "body": "Stuur `reference_number` en kandidaatdetails. Optionele cv- en motivatiebestanden gebruiken `FileData` met base64-data, geen multipart-upload. Dit is een andere invoervorm dan de calls met `vacancy_id`.",
+    "guide": "/guides/applications",
+    "guide_title": "Sollicitaties"
+  },
+  "POST /api/v1/applications/existing-application/": {
+    "description": "Koppel een bestaande kandidaat aan een vacature.",
+    "body": "Stuur `candidate_id` en `vacancy_id`. Met optioneel `workflow_id` kies je expliciet een proces voor deze sollicitatie. Gebruik UUID’s uit dezelfde organisatie.",
+    "guide": "/guides/applications",
+    "guide_title": "Sollicitaties"
+  },
+  "POST /api/v1/applications/candidate-application/": {
+    "description": "Maak een sollicitatie voor een bestaande of nieuwe kandidaat.",
+    "body": "Stuur `vacancy_id` en precies één van `candidate_id` of `candidate`. Beide of geen van beide levert een validatiefout op.",
+    "guide": "/guides/applications",
+    "guide_title": "Sollicitaties"
+  },
+  "PATCH /api/v1/applications/{application_id}/": {
+    "description": "Wijzig sollicitatiestatus, verantwoordelijken, bron of notities.",
+    "body": "De invoer bevat `status_id`, `recruiter_id`, `hiring_manager_id`, `source` en `notes`. De call accepteert geen `current_node_id`: een taak afhandelen laat het proces verdergaan. Een statuswijziging en een procesovergang zijn verschillende acties.",
+    "guide": "/guides/applications",
+    "guide_title": "Sollicitaties"
+  },
+  "POST /api/v1/tasks/{task_id}/handle/": {
+    "description": "Sla het resultaat van een taak op en laat de workflow de volgende actie bepalen.",
+    "body": "Stuur `result_json` voor formuliervelden en eventueel `outcome_key`. Gebruik een uitkomst uit `task.action.outcomes`; maak geen eigen uitkomstnaam. Planning kan `scheduled_start_at` en `scheduled_end_at` gebruiken. De workflow bepaalt vervolgacties en overgangen.",
+    "guide": "/guides/tasks",
+    "guide_title": "Taken afhandelen"
+  },
+  "PATCH /api/v1/tasks/{task_id}/attention/": {
+    "description": "Snooze, verberg of herstel een taak voor de huidige gebruiker.",
+    "body": "Gebruik `action: \"snooze\"`, `\"dismiss\"` of `\"restore\"`. Alleen snooze accepteert `snoozed_until`, met een toekomstige tijd en expliciete UTC-offset. De voorkeur hoort bij `X-User-Id` binnen de organisatie. De deadline, toewijzing en workflow blijven gelijk.",
+    "guide": "/guides/tasks",
+    "guide_title": "Taken afhandelen"
+  },
+  "PATCH /api/v1/tasks/{task_id}/deadline/": {
+    "description": "Wijzig of verwijder de gedeelde deadline van een actieve taak.",
+    "body": "Stuur `due_at` met een expliciete UTC-offset, of `null` om de deadline te verwijderen. Dit wijzigt de gedeelde taak; persoonlijke snoozevoorkeuren veranderen niet.",
+    "guide": "/guides/tasks",
+    "guide_title": "Taken afhandelen"
+  },
+  "GET /api/v1/tasks/": {
+    "description": "Haal taken op met filters voor status, kandidaat, sollicitatie of gebruiker.",
+    "body": "Met `attention=all` (standaard) krijg je taken ongeacht persoonlijke zichtbaarheid. `inbox` sluit verborgen en gesnoozede taken uit; `hidden` selecteert die taken. Voor deze twee filters is `X-User-Id` nodig. De response bevat context zoals `previous_step`, `next_steps`, kandidaat en sollicitatie.",
+    "guide": "/guides/tasks",
+    "guide_title": "Taken afhandelen"
+  },
+  "POST /api/v1/candidates/imports/preview": {
+    "description": "Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen.",
+    "body": "Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "POST /api/v1/candidates/imports": {
+    "description": "Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls.",
+    "body": "Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "GET /api/v1/candidates/imports/latest": {
+    "description": "Haal de laatst beschikbare importjob van deze organisatie op.",
+    "body": "Haal de laatst beschikbare importjob van deze organisatie op.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "GET /api/v1/candidates/imports/{job_id}": {
+    "description": "Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie.",
+    "body": "Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "POST /api/v1/relations/imports/preview": {
+    "description": "Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen.",
+    "body": "Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "POST /api/v1/relations/imports": {
+    "description": "Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls.",
+    "body": "Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "GET /api/v1/relations/imports/latest": {
+    "description": "Haal de laatst beschikbare importjob van deze organisatie op.",
+    "body": "Haal de laatst beschikbare importjob van deze organisatie op.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "GET /api/v1/relations/imports/{job_id}": {
+    "description": "Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie.",
+    "body": "Haal voortgang, aantallen en beschikbare rijmeldingen op voor de importjob binnen deze organisatie.",
+    "guide": "/guides/imports",
+    "guide_title": "CSV importeren"
+  },
+  "GET /api/v1/candidates/tags/options": {
+    "description": "Haal de organisatiebrede tagcatalogus op.",
+    "body": "Kandidaten, vacatures en relaties delen dezelfde catalogus. Verwijderen van een koppeling verwijdert de gedeelde tag niet.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "PUT /api/v1/candidates/{candidate_id}/tags/": {
+    "description": "Vervang alle tags van dit record.",
+    "body": "Stuur `{\"names\":[\"Frontend\",\"Vue.js\"]}`. Dit vervangt de volledige set; `{\"names\":[]}` wist de koppelingen. Namen worden getrimd en hoofdletterongevoelig hergebruikt. Maximaal 50 tags per record en 80 tekens per naam.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "GET /api/v1/vacancies/tags/options": {
+    "description": "Haal de organisatiebrede tagcatalogus op.",
+    "body": "Kandidaten, vacatures en relaties delen dezelfde catalogus. Verwijderen van een koppeling verwijdert de gedeelde tag niet.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "PUT /api/v1/vacancies/{vacancy_id}/tags/": {
+    "description": "Vervang alle tags van dit record.",
+    "body": "Stuur `{\"names\":[\"Frontend\",\"Vue.js\"]}`. Dit vervangt de volledige set; `{\"names\":[]}` wist de koppelingen. Namen worden getrimd en hoofdletterongevoelig hergebruikt. Maximaal 50 tags per record en 80 tekens per naam.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "GET /api/v1/relations/tags/options": {
+    "description": "Haal de organisatiebrede tagcatalogus op.",
+    "body": "Kandidaten, vacatures en relaties delen dezelfde catalogus. Verwijderen van een koppeling verwijdert de gedeelde tag niet.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "PUT /api/v1/relations/{relation_id}/tags/": {
+    "description": "Vervang alle tags van dit record.",
+    "body": "Stuur `{\"names\":[\"Frontend\",\"Vue.js\"]}`. Dit vervangt de volledige set; `{\"names\":[]}` wist de koppelingen. Namen worden getrimd en hoofdletterongevoelig hergebruikt. Maximaal 50 tags per record en 80 tekens per naam.",
+    "guide": "/guides/tags",
+    "guide_title": "Gedeelde tags"
+  },
+  "POST /api/v1/candidates/from-cv/": {
+    "description": "Maak kandidaatdata op basis van een cv-upload.",
+    "body": "Stuur het bestand als multipartveld `cv`. Dit doet een externe AI-aanvraag en kost een AI-credit. Swagger specificeert de succesvolle response als `Any`, dus de huidige specificatie garandeert hier geen concreet responsemodel.",
+    "guide": "/guides/ai-credits",
+    "guide_title": "AI-credits"
+  },
+  "POST /api/v1/candidates/from-linkedin-url/": {
+    "description": "Verrijk kandidaatdata via een LinkedIn-URL.",
+    "body": "Stuur `linkedin_url`. Dit gebruikt een externe AI-aanvraag en kost een AI-credit; gebruik de daadwerkelijk beschikbare responsevelden uit `CandidateSchema`.",
+    "guide": "/guides/ai-credits",
+    "guide_title": "AI-credits"
+  },
+  "POST /api/v1/vacancies/from-prompt/": {
+    "description": "Genereer een vacature met een locatie, tone of voice en keywords.",
+    "body": "Stuur de velden uit `VacancyPromptInput`. De call gebruikt een externe AI-aanvraag en kost een AI-credit.",
+    "guide": "/guides/ai-credits",
+    "guide_title": "AI-credits"
+  },
+  "POST /api/v1/vacancies/from-url/": {
+    "description": "Importeer vacaturedata vanaf een URL.",
+    "body": "Stuur `location_id` en `vacancy_url`. De URL wordt als HTTP-URL gevalideerd. Deze AI-aanvraag kost een AI-credit.",
+    "guide": "/guides/ai-credits",
+    "guide_title": "AI-credits"
+  },
+  "POST /api/v1/documents/": {
+    "description": "Upload een cv of motivatiebrief met JSON en base64-bestandsdata.",
+    "body": "Gebruik `type: \"CV\"` of `\"MOTIVATION_LETTER\"` en `file_data: {file_name, data, content_type}`. Koppel het document met `candidate_id` en/of `application_id` volgens de documentcontext.",
+    "guide": "/guides/documents",
+    "guide_title": "Documenten"
+  },
+  "GET /api/v1/documents/{document_id}": {
+    "description": "Haal de metadata van een document op.",
+    "body": "Deze call retourneert `DocumentSchema`, geen bestand of download-URL. Gebruik de aparte `/url`-call om het bestand te downloaden.",
+    "guide": "/guides/documents",
+    "guide_title": "Documenten"
+  },
+  "GET /api/v1/documents/{document_id}/url": {
+    "description": "Vraag een tijdelijke download-URL voor een document op.",
+    "body": "De response is een JSON-string met een signed URL. De URL is vijf minuten geldig; vraag een nieuwe URL op als de bestaande is verlopen.",
+    "guide": "/guides/documents",
+    "guide_title": "Documenten"
+  },
+  "DELETE /api/v1/documents/{document_id}/": {
+    "description": "Verwijder een document.",
+    "body": "Deze route heeft in Swagger `200` als succesvolle response en geen concreet payloadmodel. Verwacht hier niet dezelfde `204`-response als bij de meeste andere delete-calls.",
+    "guide": "/guides/documents",
+    "guide_title": "Documenten"
+  },
+  "PATCH /api/v1/workflows/{workflow_id}/": {
+    "description": "Wijzig procesinstellingen en optioneel de volledige structuur.",
+    "body": "Als je `nodes` of `transitions` wijzigt, moet je beide meesturen. Knooppuntkeys moeten uniek zijn; het proces heeft precies één startknooppunt. Overgangen verwijzen naar keys in de aangeleverde structuur.",
+    "guide": "/guides/workflows",
+    "guide_title": "Processen en statussen"
+  },
+  "GET /api/v1/workflows/{workflow_id}": {
+    "description": "Haal de volledige processtructuur op.",
+    "body": "De response bevat `nodes` en `transitions`, inclusief acties, uitkomsten, formulierschema’s en gekoppelde statussen. Gebruik de ID uit `application.workflow_instance.workflow_id` om het proces van een sollicitatie te bekijken.",
+    "guide": "/guides/workflows",
+    "guide_title": "Processen en statussen"
+  },
+  "GET /api/v1/ai-credits": {
+    "description": "Haal het organisatiesaldo en de kosten per AI-aanvraag op.",
+    "body": "De response bevat `credits` en `request_cost`. Een organisatie zonder eerder geïnitialiseerd saldo begint met 100 credits. Externe AI-aanvragen kosten één credit, ook als de provider daarna een fout of timeout geeft.",
+    "guide": "/guides/ai-credits",
+    "guide_title": "AI-credits"
+  },
+  "GET /api/v1/resource-usage": {
+    "description": "Haal de resourceaantallen van de organisatie op.",
+    "body": "Gebruik `X-Organization-Id`. Dit endpoint rapporteert resourceverbruik; het is een andere response dan de AI-creditbalans."
+  },
+  "GET /api/v1/recruitment-news/": {
+    "description": "Haal beschikbare recruitmentartikelen op.",
+    "body": "De response is een lijst met `RecruitmentArticle`-objecten. Als de externe feed niet beschikbaar of ongeldig is, retourneert de handler `502` met een string in `detail`."
+  },
+  "GET /api/v1/organization-lifecycle/ready": {
+    "description": "Controleer of het interne lifecycleprotocol beschikbaar is.",
+    "body": "Deze call vereist `X-Lifecycle-Key`. Lifecycleondersteuning staat standaard uit; de handler retourneert dan `503`. De organisatievariant inventariseert resourceaantallen.",
+    "guide": "/guides/organization-lifecycle",
+    "guide_title": "Organisatielifecycle"
+  },
+  "GET /api/v1/organization-lifecycle/ready/{organization_id}": {
+    "description": "Controleer of het interne lifecycleprotocol beschikbaar is.",
+    "body": "Deze call vereist `X-Lifecycle-Key`. Lifecycleondersteuning staat standaard uit; de handler retourneert dan `503`. De organisatievariant inventariseert resourceaantallen.",
+    "guide": "/guides/organization-lifecycle",
+    "guide_title": "Organisatielifecycle"
+  },
+  "POST /api/v1/organization-lifecycle/{organization_id}/{action}": {
+    "description": "Voer een interne, gecoördineerde organisatielifecycleactie uit.",
+    "body": "Mogelijke acties zijn `snapshot`, `freeze`, `restore`, `prepare`, `delete` en `export`. De body bevat de `id` van het actuele verwijderverzoek in IAM. Onjuiste state of een verouderd verzoek levert `409` op. `export` kan een ZIP-bestand retourneren in plaats van JSON. Swagger heeft voor deze dynamische handler geen volledig responsemodel.",
+    "guide": "/guides/organization-lifecycle",
+    "guide_title": "Organisatielifecycle"
+  },
+  "GET /api/v1/call-lists/": {
+    "description": "Beheer bellijsten met kandidaten en relaties.",
+    "body": "Bellijsten zijn beschikbaar voor recruitmenttype `others` of `selfAndOthers`. Aanmaken gebruikt `candidate_ids` en `relation_ids`. Bij wijzigen vervangt een aangeleverde lijst de gekoppelde IDs; laat een veld weg om die koppelingen te behouden. Verwijderde en geanonimiseerde kandidaten worden niet getoond.",
+    "guide": "/guides/call-lists",
+    "guide_title": "Bellijsten"
+  },
+  "POST /api/v1/call-lists/": {
+    "description": "Beheer bellijsten met kandidaten en relaties.",
+    "body": "Bellijsten zijn beschikbaar voor recruitmenttype `others` of `selfAndOthers`. Aanmaken gebruikt `candidate_ids` en `relation_ids`. Bij wijzigen vervangt een aangeleverde lijst de gekoppelde IDs; laat een veld weg om die koppelingen te behouden. Verwijderde en geanonimiseerde kandidaten worden niet getoond.",
+    "guide": "/guides/call-lists",
+    "guide_title": "Bellijsten"
+  },
+  "PATCH /api/v1/call-lists/{call_list_id}/": {
+    "description": "Beheer bellijsten met kandidaten en relaties.",
+    "body": "Bellijsten zijn beschikbaar voor recruitmenttype `others` of `selfAndOthers`. Aanmaken gebruikt `candidate_ids` en `relation_ids`. Bij wijzigen vervangt een aangeleverde lijst de gekoppelde IDs; laat een veld weg om die koppelingen te behouden. Verwijderde en geanonimiseerde kandidaten worden niet getoond.",
+    "guide": "/guides/call-lists",
+    "guide_title": "Bellijsten"
+  },
+  "GET /api/v1/integrations/{integration_id}/oauth/start": {
+    "description": "Start de OAuth authorization-codeflow voor een integratie.",
+    "body": "Gebruik queryparameters `organization_id` en `user_id`. De handler retourneert een redirect naar de provider met gesigneerde state. Swagger vermeldt een generieke `200`, maar `RedirectResponse` gebruikt hier standaard `307`; volg de browserredirect.",
+    "guide": "/guides/integrations",
+    "guide_title": "OAuth-integraties"
+  },
+  "GET /api/v1/integrations/{integration_id}/oauth/callback": {
+    "description": "Verwerk de redirect van een OAuth-provider.",
+    "body": "Deze call is bedoeld als callback voor de provider. De handler valideert gesigneerde state, slaat de koppeling op en redirect naar de frontend. Providerqueryvelden zoals `code` en `state` worden uit de Request gelezen en staan niet expliciet in Swagger. De runtime-redirect is standaard `307`.",
+    "guide": "/guides/integrations",
+    "guide_title": "OAuth-integraties"
+  },
+  "POST /api/v1/integrations/links/": {
+    "description": "Maak een generieke integratiekoppeling aan.",
+    "body": "OAuth-integraties moeten eerst hun providerflow afronden. De generieke POST kan die flow niet vervangen.",
+    "guide": "/guides/integrations",
+    "guide_title": "OAuth-integraties"
+  },
+  "GET /api/v1/integrations/links/{link_id}/get-options/{key}": {
+    "description": "Vraag dynamische opties voor een integratiekoppeling op.",
+    "body": "Voor een agenda-integratie gebruik je `key=calendar_id`. Sla de gekozen agenda daarna op via `PATCH /api/v1/integrations/links/{link_id}`. De provider levert alleen beschikbare bewerkbare agenda’s.",
+    "guide": "/guides/integrations",
+    "guide_title": "OAuth-integraties"
+  }
+}

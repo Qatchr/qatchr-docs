@@ -1,0 +1,21 @@
+---
+title: "Taak afhandelen"
+description: "Sla het resultaat van een taak op en laat de workflow de volgende actie bepalen."
+openapi: "/openapi/qatchr.json POST /api/v1/tasks/{task_id}/handle/"
+---
+
+Stuur `result_json` voor formuliervelden en eventueel `outcome_key`. Gebruik een uitkomst uit `task.action.outcomes`; maak geen eigen uitkomstnaam. Planning kan `scheduled_start_at` en `scheduled_end_at` gebruiken. De workflow bepaalt vervolgacties en overgangen.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Taken afhandelen](/guides/tasks) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `handle_task_api_v1_tasks__task_id__handle__post`. Route: `app/api/v1/tasks.py` (`handle_task`).

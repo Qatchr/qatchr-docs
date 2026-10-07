@@ -1,0 +1,19 @@
+---
+title: "Lifecycleactie uitvoeren"
+description: "Voer een interne, gecoördineerde organisatielifecycleactie uit."
+openapi: "/openapi/qatchr.json POST /api/v1/organization-lifecycle/{organization_id}/{action}"
+---
+
+Mogelijke acties zijn `snapshot`, `freeze`, `restore`, `prepare`, `delete` en `export`. De body bevat de `id` van het actuele verwijderverzoek in IAM. Onjuiste state of een verouderd verzoek levert `409` op. `export` kan een ZIP-bestand retourneren in plaats van JSON. Swagger heeft voor deze dynamische handler geen volledig responsemodel.
+
+## Toegang
+
+Dit is een interne servicecall. Gebruik `X-Lifecycle-Key`; een normale bearer-token vervangt deze sleutel niet. Zie [organisatielifecycle](/guides/organization-lifecycle).
+
+## Meer uitleg
+
+Zie [Organisatielifecycle](/guides/organization-lifecycle) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `action_api_v1_organization_lifecycle__organization_id___action__post`. Route: `app/services/organization_lifecycle.py` (`action`).

@@ -1,0 +1,23 @@
+---
+title: "Sollicitatie wijzigen"
+description: "Wijzig sollicitatiestatus, verantwoordelijken, bron of notities."
+openapi: "/openapi/qatchr.json PATCH /api/v1/applications/{application_id}/"
+---
+
+De invoer bevat `status_id`, `recruiter_id`, `hiring_manager_id`, `source` en `notes`. De call accepteert geen `current_node_id`: een taak afhandelen laat het proces verdergaan. Een statuswijziging en een procesovergang zijn verschillende acties.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-applications` binnen scope `qatchr`.
+
+Een `require_subscription`-controle vereist algemene Qatchr-toegang voor deze mutatie.
+
+## Meer uitleg
+
+Zie [Sollicitaties](/guides/applications) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `update_application_api_v1_applications__application_id___patch`. Route: `app/api/v1/applications.py` (`update_application`).

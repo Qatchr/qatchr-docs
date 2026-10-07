@@ -1,0 +1,21 @@
+---
+title: "Importvoorbeeld bekijken"
+description: "Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen."
+openapi: "/openapi/qatchr.json POST /api/v1/candidates/imports/preview"
+---
+
+Upload een UTF-8 CSV als multipartveld `file`. Je krijgt `headers`, `row_count` en `sample` om de kolommen te koppelen.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [CSV importeren](/guides/imports) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `preview_import_api_v1_candidates_imports_preview_post`. Route: `app/api/v1/candidate_imports.py` (`preview_import`).

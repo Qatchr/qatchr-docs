@@ -1,0 +1,19 @@
+---
+title: "Integratieopties ophalen"
+description: "Vraag dynamische opties voor een integratiekoppeling op."
+openapi: "/openapi/qatchr.json GET /api/v1/integrations/links/{link_id}/get-options/{key}"
+---
+
+Voor een agenda-integratie gebruik je `key=calendar_id`. Sla de gekozen agenda daarna op via `PATCH /api/v1/integrations/links/{link_id}`. De provider levert alleen beschikbare bewerkbare agenda’s.
+
+## Toegang
+
+De route heeft geen expliciete `check_permission`-decorator. Gebruik de organisatie- en gebruikersheaders die bij de parameters staan. Aanvullende gatewaycontroles hangen af van de deployment; zie [authenticatie](/guides/authentication).
+
+## Meer uitleg
+
+Zie [OAuth-integraties](/guides/integrations) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_integration_link_options_api_v1_integrations_links__link_id__get_options__key__get`. Route: `app/api/v1/integrations.py` (`get_integration_link_options`).

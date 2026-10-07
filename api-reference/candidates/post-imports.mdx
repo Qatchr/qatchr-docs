@@ -1,0 +1,21 @@
+---
+title: "Import starten"
+description: "Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls."
+openapi: "/openapi/qatchr.json POST /api/v1/candidates/imports"
+---
+
+Upload multipartvelden `file` en `mapping`. Mapping is een JSON-string met veldnamen als keys en kolomindexen vanaf nul als values. De response is `202 Accepted`; haal daarna de voortgang op via de statuscalls.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-candidates` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [CSV importeren](/guides/imports) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `start_import_api_v1_candidates_imports_post`. Route: `app/api/v1/candidate_imports.py` (`start_import`).

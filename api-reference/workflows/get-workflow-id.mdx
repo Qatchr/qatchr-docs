@@ -1,0 +1,21 @@
+---
+title: "Proces ophalen"
+description: "Haal de volledige processtructuur op."
+openapi: "/openapi/qatchr.json GET /api/v1/workflows/{workflow_id}"
+---
+
+De response bevat `nodes` en `transitions`, inclusief acties, uitkomsten, formulierschema’s en gekoppelde statussen. Gebruik de ID uit `application.workflow_instance.workflow_id` om het proces van een sollicitatie te bekijken.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-pipelines` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [Processen en statussen](/guides/workflows) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_workflow_api_v1_workflows__workflow_id__get`. Route: `app/api/v1/workflows.py` (`get_workflow`).

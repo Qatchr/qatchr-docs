@@ -1,0 +1,21 @@
+---
+title: "AI-creditsaldo ophalen"
+description: "Haal het organisatiesaldo en de kosten per AI-aanvraag op."
+openapi: "/openapi/qatchr.json GET /api/v1/ai-credits"
+---
+
+De response bevat `credits` en `request_cost`. Een organisatie zonder eerder geïnitialiseerd saldo begint met 100 credits. Externe AI-aanvragen kosten één credit, ook als de provider daarna een fout of timeout geeft.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+De call controleert geauthenticeerd lidmaatschap; er is geen afzonderlijk permission-label op de route.
+
+## Meer uitleg
+
+Zie [AI-credits](/guides/ai-credits) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `get_ai_credits_api_v1_ai_credits_get`. Route: `app/api/v1/ai_credits.py` (`get_ai_credits`).

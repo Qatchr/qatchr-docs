@@ -1,0 +1,17 @@
+---
+title: "Download-URL ophalen"
+description: "Download-URL ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/contracts/{contract_id}/url"
+---
+
+Download-URL ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-relations` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_contract_url_api_v1_contracts__contract_id__url_get`. Route: `app/api/v1/contracts.py` (`get_contract_url`).

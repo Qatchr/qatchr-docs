@@ -1,0 +1,21 @@
+---
+title: "Vacature vanuit een URL importeren"
+description: "Importeer vacaturedata vanaf een URL."
+openapi: "/openapi/qatchr.json POST /api/v1/vacancies/from-url/"
+---
+
+Stuur `location_id` en `vacancy_url`. De URL wordt als HTTP-URL gevalideerd. Deze AI-aanvraag kost een AI-credit.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `manage-vacancies` binnen scope `qatchr`.
+
+## Meer uitleg
+
+Zie [AI-credits](/guides/ai-credits) voor de volledige werkwijze.
+
+## Bron
+
+Swagger-operation: `create_vacancy_from_url_api_v1_vacancies_from_url__post`. Route: `app/api/v1/vacancies.py` (`create_vacancy_from_url`).

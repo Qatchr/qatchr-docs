@@ -1,0 +1,17 @@
+---
+title: "Talentpool ophalen"
+description: "Talentpool ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer."
+openapi: "/openapi/qatchr.json GET /api/v1/talent-pools/{talent_pool_id}"
+---
+
+Talentpool ophalen via de Qatchr API. De specificatie toont de exacte parameters, invoer en uitvoer.
+
+## Toegang
+
+Stuur `Authorization: Bearer <access-token>` en `X-Organization-Id` mee.
+
+Vereist recht: `view-talentpools` binnen scope `qatchr`.
+
+## Bron
+
+Swagger-operation: `get_talent_pool_api_v1_talent_pools__talent_pool_id__get`. Route: `app/api/v1/talent_pools.py` (`get_talent_pool`).
